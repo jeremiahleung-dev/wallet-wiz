@@ -87,7 +87,6 @@ export default function Welcome({ onStart }) {
       <p style={{
         fontFamily: 'var(--font)',
         fontSize: '1.15rem',
-        fontStyle: 'italic',
         color: 'var(--text-secondary)',
         maxWidth: 440,
         lineHeight: 1.6,
@@ -104,7 +103,6 @@ export default function Welcome({ onStart }) {
         style={{
           fontFamily: 'var(--font)',
           fontSize: '1.05rem',
-          fontStyle: 'italic',
           color: hovered ? '#0e0e0e' : 'var(--accent)',
           background: hovered ? 'var(--accent)' : 'transparent',
           border: '1px solid var(--accent)',

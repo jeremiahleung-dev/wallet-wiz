@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { questions } from '../data/questions'
 import QuestionCard from './QuestionCard'
+import PixelCardProgress from './PixelCardProgress'
 
 export default function Survey({ onComplete }) {
   const [index, setIndex] = useState(0)
@@ -45,40 +46,9 @@ export default function Survey({ onComplete }) {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '80px 24px 40px',
+      padding: '100px 24px 40px',
     }}>
-      {/* Progress bar */}
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 2,
-        background: 'var(--progress-track)',
-        zIndex: 99,
-      }}>
-        <div style={{
-          height: '100%',
-          background: 'var(--progress-fill)',
-          width: `${((index + 1) / questions.length) * 100}%`,
-          transition: 'width 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
-        }} />
-      </div>
-
-      {/* Step counter */}
-      <div style={{
-        position: 'fixed',
-        top: 24,
-        left: '50%',
-        transform: 'translateX(-50%)',
-        fontFamily: 'var(--font)',
-        fontSize: '0.82rem',
-        color: 'var(--text-muted)',
-        letterSpacing: '0.08em',
-        zIndex: 99,
-      }}>
-        {index + 1} of {questions.length}
-      </div>
+      <PixelCardProgress current={index + 1} total={questions.length} />
 
       <QuestionCard
         question={questions[index]}

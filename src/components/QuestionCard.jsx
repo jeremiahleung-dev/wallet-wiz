@@ -42,7 +42,6 @@ export default function QuestionCard({ question, animState, onAnswer, onBack }) 
         <p style={{
           fontFamily: 'var(--font)',
           fontSize: '1rem',
-          fontStyle: 'italic',
           color: 'var(--text-secondary)',
           lineHeight: 1.5,
         }}>
@@ -77,7 +76,6 @@ export default function QuestionCard({ question, animState, onAnswer, onBack }) 
             style={{
               fontFamily: 'var(--font)',
               fontSize: '0.9rem',
-              fontStyle: 'italic',
               color: 'var(--text-muted)',
               background: 'none',
               border: 'none',
@@ -136,7 +134,6 @@ function OptionCard({ option, isSelected, onClick }) {
         <span style={{
           fontFamily: 'var(--font)',
           fontSize: '0.82rem',
-          fontStyle: 'italic',
           color: 'var(--text-secondary)',
           lineHeight: 1.4,
         }}>

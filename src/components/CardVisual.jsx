@@ -40,7 +40,6 @@ export default function CardVisual({ card }) {
         right: 24,
         fontFamily: 'var(--font)',
         fontSize: '0.8rem',
-        fontStyle: 'italic',
         color: 'rgba(255,255,255,0.6)',
         letterSpacing: '0.05em',
       }}>
@@ -103,7 +102,6 @@ function NetworkMark({ network }) {
     return (
       <span style={{
         fontFamily: 'Georgia, serif',
-        fontStyle: 'italic',
         fontWeight: 700,
         fontSize: '1rem',
         color: c1,

@@ -6,7 +6,7 @@ import Results from './components/Results'
 import { getRecommendations } from './utils/recommend'
 
 export default function App() {
-  const [theme, setTheme] = useState('dark')
+  const [theme, setTheme] = useState('light')
   const [screen, setScreen] = useState('welcome') // welcome | survey | results
   const [recommendations, setRecommendations] = useState([])
   const [answers, setAnswers] = useState({})

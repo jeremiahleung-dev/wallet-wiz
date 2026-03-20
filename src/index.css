@@ -102,6 +102,11 @@ html, body {
   100% { background-position: 200% center; }
 }
 
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(-50%); }
+  50%       { transform: translateY(calc(-50% - 3px)); }
+}
+
 .anim-slide-in-right  { animation: slideInRight  0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .anim-slide-out-left  { animation: slideOutLeft  0.32s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
 .anim-slide-in-left   { animation: slideInLeft   0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards; }

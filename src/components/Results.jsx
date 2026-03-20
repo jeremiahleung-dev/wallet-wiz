@@ -30,7 +30,6 @@ export default function Results({ recommendations, answers, onRestart }) {
         <p style={{
           fontFamily: 'var(--font)',
           fontSize: '1rem',
-          fontStyle: 'italic',
           color: 'var(--text-secondary)',
         }}>
           Ranked by how well they match your profile.
@@ -58,7 +57,6 @@ export default function Results({ recommendations, answers, onRestart }) {
           style={{
             fontFamily: 'var(--font)',
             fontSize: '0.95rem',
-            fontStyle: 'italic',
             color: 'var(--text-muted)',
             background: 'none',
             border: '1px solid var(--card-border)',
@@ -83,7 +81,6 @@ export default function Results({ recommendations, answers, onRestart }) {
           fontFamily: 'var(--font)',
           fontSize: '0.78rem',
           color: 'var(--text-muted)',
-          fontStyle: 'italic',
         }}>
           Approval not guaranteed — always verify your eligibility with the issuer.
         </p>
@@ -164,7 +161,6 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
           <div style={{
             fontFamily: 'var(--font)',
             fontSize: '0.85rem',
-            fontStyle: 'italic',
             color: 'var(--text-secondary)',
           }}>
             {card.tag}
@@ -218,7 +214,6 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
             <span key={i} style={{
               fontFamily: 'var(--font)',
               fontSize: '0.78rem',
-              fontStyle: 'italic',
               color: 'var(--text-secondary)',
               background: 'var(--surface)',
               border: '1px solid var(--card-border)',

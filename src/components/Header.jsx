@@ -19,7 +19,6 @@ export default function Header({ theme, onToggleTheme }) {
           fontFamily: 'var(--font)',
           fontSize: '1.25rem',
           fontWeight: 500,
-          fontStyle: 'italic',
           color: 'var(--accent)',
           letterSpacing: '0.01em',
         }}>
