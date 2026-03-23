@@ -1,4 +1,3 @@
-// Credit score tier ordering for comparison
 export const SCORE_ORDER = { poor: 0, fair: 1, good: 2, very_good: 3, excellent: 4 }
 
 export const cards = [
@@ -24,6 +23,7 @@ export const cards = [
     ],
     annualFeeTier: 'none',
     tag: 'Best for Building Credit',
+    applyUrl: 'https://www.discover.com/credit-cards/secured/',
   },
   {
     id: 'capital-one-platinum-secured',
@@ -46,6 +46,7 @@ export const cards = [
     ],
     annualFeeTier: 'none',
     tag: 'Lowest Barrier to Entry',
+    applyUrl: 'https://www.capitalone.com/credit-cards/platinum/',
   },
 
   // ── Fair Credit ────────────────────────────────────────────────────────────
@@ -70,6 +71,7 @@ export const cards = [
     ],
     annualFeeTier: 'none',
     tag: 'Best Flat-Rate for Fair Credit',
+    applyUrl: 'https://www.capitalone.com/credit-cards/quicksilverone/',
   },
 
   // ── Good Credit — No Annual Fee ────────────────────────────────────────────
@@ -94,6 +96,7 @@ export const cards = [
     ],
     annualFeeTier: 'none',
     tag: 'Simple & Rewarding',
+    applyUrl: 'https://www.capitalone.com/credit-cards/quicksilver/',
   },
   {
     id: 'wells-fargo-active-cash',
@@ -116,6 +119,7 @@ export const cards = [
     ],
     annualFeeTier: 'none',
     tag: 'Highest Flat-Rate Cash Back',
+    applyUrl: 'https://www.wellsfargo.com/credit-cards/active-cash-card/',
   },
   {
     id: 'citi-double-cash',
@@ -138,6 +142,7 @@ export const cards = [
     ],
     annualFeeTier: 'none',
     tag: 'Classic Everyday Earner',
+    applyUrl: 'https://www.citi.com/credit-cards/citi-double-cash-credit-card',
   },
   {
     id: 'chase-freedom-unlimited',
@@ -160,6 +165,7 @@ export const cards = [
     ],
     annualFeeTier: 'none',
     tag: 'Best No-Fee Everyday Card',
+    applyUrl: 'https://creditcards.chase.com/cash-back-credit-cards/freedom/unlimited',
   },
   {
     id: 'chase-freedom-flex',
@@ -182,6 +188,7 @@ export const cards = [
     ],
     annualFeeTier: 'none',
     tag: 'Best Rotating Rewards',
+    applyUrl: 'https://creditcards.chase.com/cash-back-credit-cards/freedom/flex',
   },
   {
     id: 'amex-blue-cash-everyday',
@@ -204,6 +211,7 @@ export const cards = [
     ],
     annualFeeTier: 'none',
     tag: 'Best No-Fee Grocery Card',
+    applyUrl: 'https://www.americanexpress.com/us/credit-cards/card/blue-cash-everyday/',
   },
 
   // ── Good/Very Good — With Annual Fee ──────────────────────────────────────
@@ -228,6 +236,7 @@ export const cards = [
     ],
     annualFeeTier: 'low',
     tag: 'Best Entry-Level Travel Card',
+    applyUrl: 'https://www.capitalone.com/credit-cards/venture/',
   },
   {
     id: 'chase-sapphire-preferred',
@@ -250,6 +259,7 @@ export const cards = [
     ],
     annualFeeTier: 'low',
     tag: 'Best All-Around Travel Card',
+    applyUrl: 'https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred',
   },
   {
     id: 'amex-blue-cash-preferred',
@@ -272,6 +282,7 @@ export const cards = [
     ],
     annualFeeTier: 'low',
     tag: 'Best Grocery Card, Period',
+    applyUrl: 'https://www.americanexpress.com/us/credit-cards/card/blue-cash-preferred/',
   },
 
   // ── Premium ────────────────────────────────────────────────────────────────
@@ -296,6 +307,7 @@ export const cards = [
     ],
     annualFeeTier: 'medium',
     tag: 'Premium Value at Mid-Tier Price',
+    applyUrl: 'https://www.capitalone.com/credit-cards/venture-x/',
   },
   {
     id: 'chase-sapphire-reserve',
@@ -317,7 +329,8 @@ export const cards = [
       'Complimentary DashPass and Lyft Pink memberships',
     ],
     annualFeeTier: 'high',
-    tag: 'The Frequent Flyer\'s Card',
+    tag: "The Frequent Flyer's Card",
+    applyUrl: 'https://creditcards.chase.com/rewards-credit-cards/sapphire/reserve',
   },
   {
     id: 'amex-platinum',
@@ -342,6 +355,6 @@ export const cards = [
     ],
     annualFeeTier: 'high',
     tag: 'The Ultimate Status Card',
+    applyUrl: 'https://www.americanexpress.com/us/credit-cards/card/platinum/',
   },
 ]
-
