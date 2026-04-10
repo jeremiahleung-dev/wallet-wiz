@@ -142,7 +142,7 @@ function CardCellLabel({ name }) {
 }
 
 // ── Empty state ─────────────────────────────────────────────────────────────
-function EmptyState({ onBack }) {
+function EmptyState({ onBack, backLabel = '← Back to results', emptyMessage = 'Tap the bookmark icon on any result card to save it here for comparison.' }) {
   return (
     <div style={{
       minHeight: '100vh',
@@ -170,7 +170,7 @@ function EmptyState({ onBack }) {
         maxWidth: 300,
         marginBottom: 32,
       }}>
-        Tap the bookmark icon on any result card to save it here for comparison.
+        {emptyMessage}
       </p>
       <button
         onClick={onBack}
@@ -186,21 +186,21 @@ function EmptyState({ onBack }) {
           cursor: 'pointer',
         }}
       >
-        ← Back to results
+        {backLabel}
       </button>
     </div>
   )
 }
 
 // ── Main component ──────────────────────────────────────────────────────────
-export default function SavedCards({ savedIds, onRemove, onClearAll, onBack }) {
+export default function SavedCards({ savedIds, onRemove, onClearAll, onBack, title = 'Compare', emptyMessage, backLabel }) {
   const [applyHovered, setApplyHovered] = useState(null)
 
   const savedCards = savedIds
     .map(id => allCards.find(c => c.id === id))
     .filter(Boolean)
 
-  if (savedCards.length === 0) return <EmptyState onBack={onBack} />
+  if (savedCards.length === 0) return <EmptyState onBack={onBack} backLabel={backLabel} emptyMessage={emptyMessage} />
 
   const cardGrid = {
     display: 'grid',
@@ -254,7 +254,7 @@ export default function SavedCards({ savedIds, onRemove, onClearAll, onBack }) {
             color: 'var(--text-primary)',
             letterSpacing: '-0.02em',
           }}>
-            Compare
+            {title}
             <span style={{
               fontFamily: 'var(--font)',
               fontSize: '0.85rem',

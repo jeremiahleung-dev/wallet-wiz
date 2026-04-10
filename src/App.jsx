@@ -68,6 +68,10 @@ export default function App() {
     setScreen('compare')
   }
 
+  const handleOpenMyCards = () => {
+    setScreen('my-cards')
+  }
+
   const handleRemoveFromCompare = (cardId) => {
     const updated = toggleSaved(cardId, savedIds)
     setSavedIds(updated)
@@ -78,9 +82,20 @@ export default function App() {
     setScreen('results')
   }
 
+  const handleClearAllMyCards = () => {
+    setSavedIds(clearSaved())
+    // Stay on my-cards — empty state renders automatically
+  }
+
   return (
     <>
-      <Header theme={theme} onToggleTheme={handleToggleTheme} onHome={handleRestart} />
+      <Header
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
+        onHome={handleRestart}
+        savedCount={savedIds.length}
+        onMyCards={handleOpenMyCards}
+      />
 
       {screen === 'welcome' && (
         <Welcome onStart={handleStart} onPrivacy={handleOpenPrivacy} isLeaving={leaving} />
@@ -105,6 +120,17 @@ export default function App() {
           onRemove={handleRemoveFromCompare}
           onClearAll={handleClearAll}
           onBack={() => setScreen('results')}
+        />
+      )}
+      {screen === 'my-cards' && (
+        <SavedCards
+          savedIds={savedIds}
+          onRemove={handleRemoveFromCompare}
+          onClearAll={handleClearAllMyCards}
+          onBack={() => setScreen('welcome')}
+          title="My Cards"
+          backLabel="← Back to home"
+          emptyMessage="Take the quiz and bookmark any cards you'd like to compare here."
         />
       )}
 
