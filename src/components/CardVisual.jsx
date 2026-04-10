@@ -3,15 +3,15 @@ export default function CardVisual({ card }) {
 
   return (
     <div style={{
-      width: 300,
-      height: 185,
+      width: 'min(300px, 100%)',
+      aspectRatio: '300 / 185',
       borderRadius: 18,
       background: `linear-gradient(135deg, ${g1} 0%, ${g2} 100%)`,
       border: '1px solid rgba(255,255,255,0.1)',
       boxShadow: '0 16px 52px rgba(0,0,0,0.45)',
       position: 'relative',
       overflow: 'hidden',
-      flexShrink: 0,
+      flexShrink: 1,
     }}>
       {/* Shine */}
       <div style={{

@@ -26,14 +26,14 @@ export default function Welcome({ onStart, onPrivacy }) {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '120px 24px 60px',
+        padding: 'clamp(88px, 20vw, 120px) 24px 48px',
         textAlign: 'center',
       }}>
 
         {/* Floating card */}
         <div style={{
-          width: 240,
-          height: 148,
+          width: 'min(240px, 64vw)',
+          aspectRatio: '240 / 148',
           borderRadius: 18,
           background: 'linear-gradient(135deg, #3730A3 0%, #5B47F5 50%, #A78BFA 100%)',
           boxShadow: '0 24px 60px rgba(91, 71, 245, 0.22), 0 4px 16px rgba(91, 71, 245, 0.12)',
@@ -116,13 +116,13 @@ export default function Welcome({ onStart, onPrivacy }) {
           {stats.map(stat => (
             <span key={stat} style={{
               fontFamily: 'var(--font)',
-              fontSize: '0.8rem',
+              fontSize: '0.85rem',
               fontWeight: 500,
               color: 'var(--text-secondary)',
               background: 'var(--surface)',
               border: '1px solid var(--card-border)',
               borderRadius: 100,
-              padding: '5px 14px',
+              padding: '6px 16px',
               boxShadow: 'var(--shadow)',
             }}>
               {stat}
@@ -159,6 +159,7 @@ export default function Welcome({ onStart, onPrivacy }) {
         {/* How it works */}
         <div style={{
           display: 'flex',
+          flexWrap: 'wrap',
           marginTop: 80,
           width: '100%',
           maxWidth: 560,
@@ -173,7 +174,7 @@ export default function Welcome({ onStart, onPrivacy }) {
             }}>
               <div style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: '0.65rem',
+                fontSize: '0.72rem',
                 fontWeight: 700,
                 letterSpacing: '0.12em',
                 color: 'var(--accent)',
@@ -184,7 +185,7 @@ export default function Welcome({ onStart, onPrivacy }) {
               </div>
               <p style={{
                 fontFamily: 'var(--font)',
-                fontSize: '0.8rem',
+                fontSize: '0.85rem',
                 fontWeight: 400,
                 color: 'var(--text-secondary)',
                 lineHeight: 1.55,

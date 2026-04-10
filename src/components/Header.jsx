@@ -9,7 +9,7 @@ export default function Header({ theme, onToggleTheme, onHome }) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '20px 32px',
+      padding: 'max(16px, env(safe-area-inset-top)) 24px 0',
       pointerEvents: 'none',
     }}>
       <button
@@ -20,7 +20,7 @@ export default function Header({ theme, onToggleTheme, onHome }) {
           background: 'none',
           border: 'none',
           cursor: 'pointer',
-          padding: '4px 0',
+          padding: '10px 8px',
           fontFamily: 'var(--font-display)',
           fontSize: '1.05rem',
           fontWeight: 700,
@@ -42,8 +42,8 @@ export default function Header({ theme, onToggleTheme, onHome }) {
           background: 'var(--card-bg)',
           border: '1px solid var(--card-border)',
           borderRadius: '50%',
-          width: 36,
-          height: 36,
+          width: 44,
+          height: 44,
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',

@@ -67,8 +67,8 @@ export default function PixelCardProgress({ current, total }) {
 
   const progress = current / total // 0 → 1
 
-  // Track available width minus reader width and padding
-  const TRACK_PADDING = 48
+  // Track available width minus reader width and padding — responsive on mobile
+  const TRACK_PADDING = window.innerWidth < 480 ? 20 : 48
   const READER_RIGHT = TRACK_PADDING
 
   useEffect(() => {

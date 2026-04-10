@@ -1,7 +1,7 @@
 export default function Footer({ onPrivacy }) {
   return (
     <footer style={{
-      padding: '28px 36px',
+      padding: '20px 24px',
       borderTop: '1px solid var(--card-border)',
       display: 'flex',
       alignItems: 'center',
@@ -11,7 +11,7 @@ export default function Footer({ onPrivacy }) {
     }}>
       <p style={{
         fontFamily: 'var(--font)',
-        fontSize: '0.76rem',
+        fontSize: '0.82rem',
         fontWeight: 400,
         color: 'var(--text-muted)',
         lineHeight: 1.6,
@@ -24,13 +24,16 @@ export default function Footer({ onPrivacy }) {
           onClick={onPrivacy}
           style={{
             fontFamily: 'var(--font)',
-            fontSize: '0.76rem',
+            fontSize: '0.82rem',
             fontWeight: 500,
             color: 'var(--text-muted)',
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            padding: 0,
+            padding: '10px 4px',
+            minHeight: 44,
+            display: 'inline-flex',
+            alignItems: 'center',
             transition: 'color 0.2s',
           }}
           onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}

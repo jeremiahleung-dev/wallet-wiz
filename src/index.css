@@ -5,8 +5,8 @@
 }
 
 :root {
-  --font-display: 'Syne', sans-serif;
-  --font: 'DM Sans', sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font: 'Inter', system-ui, sans-serif;
 
   /* Light mode — default */
   --bg: #F9F9FB;
@@ -122,3 +122,9 @@ html, body {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 2px; }
+
+/* ── Mobile touch UX ── */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}

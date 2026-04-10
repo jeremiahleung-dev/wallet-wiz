@@ -20,7 +20,7 @@ export default function QuestionCard({ question, animState, onAnswer, onBack }) 
     }, 180)
   }
 
-  const cols = question.options.length >= 5 ? 3 : 2
+  const cols = 2
 
   return (
     <div
@@ -28,10 +28,10 @@ export default function QuestionCard({ question, animState, onAnswer, onBack }) 
       style={{ width: '100%', maxWidth: 720 }}
     >
       {/* Question */}
-      <div style={{ marginBottom: 40, textAlign: 'center' }}>
+      <div style={{ marginBottom: 28, textAlign: 'center' }}>
         <h2 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(1.6rem, 3.8vw, 2.2rem)',
+          fontSize: 'clamp(1.5rem, 3.8vw, 2.2rem)',
           fontWeight: 700,
           color: 'var(--text-primary)',
           lineHeight: 1.2,
@@ -84,7 +84,12 @@ export default function QuestionCard({ question, animState, onAnswer, onBack }) 
               border: 'none',
               cursor: 'pointer',
               transition: 'color 0.2s',
-              padding: '4px 8px',
+              padding: '12px 16px',
+              minWidth: 44,
+              minHeight: 44,
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
             onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
             onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}

@@ -48,7 +48,7 @@ export default function PrivacyModal({ onClose }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '24px',
+        padding: '16px',
         backdropFilter: 'blur(4px)',
         animation: 'fadeIn 0.2s ease both',
       }}
@@ -61,7 +61,7 @@ export default function PrivacyModal({ onClose }) {
           borderRadius: 20,
           width: '100%',
           maxWidth: 600,
-          maxHeight: '80vh',
+          maxHeight: 'calc(90vh - env(safe-area-inset-bottom, 0px))',
           overflowY: 'auto',
           boxShadow: 'var(--shadow-card)',
           animation: 'fadeUp 0.25s cubic-bezier(0.22, 1, 0.36, 1) both',
@@ -72,7 +72,7 @@ export default function PrivacyModal({ onClose }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '28px 32px 20px',
+          padding: '20px 24px 16px',
           borderBottom: '1px solid var(--card-border)',
           position: 'sticky',
           top: 0,
@@ -92,14 +92,19 @@ export default function PrivacyModal({ onClose }) {
             aria-label="Close"
             style={{
               fontFamily: 'var(--font)', fontWeight: 400,
-              fontSize: '1.2rem',
+              fontSize: '1.4rem',
               color: 'var(--text-muted)',
               background: 'none',
               border: 'none',
               cursor: 'pointer',
               lineHeight: 1,
-              padding: '4px 8px',
-              borderRadius: 6,
+              padding: '10px 12px',
+              borderRadius: 8,
+              minWidth: 44,
+              minHeight: 44,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               transition: 'color 0.2s',
             }}
             onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
@@ -110,7 +115,7 @@ export default function PrivacyModal({ onClose }) {
         </div>
 
         {/* Body */}
-        <div style={{ padding: '28px 32px 32px' }}>
+        <div style={{ padding: '20px 24px 24px' }}>
           <p style={{
             fontFamily: 'var(--font)', fontWeight: 400,
             fontSize: '0.82rem',

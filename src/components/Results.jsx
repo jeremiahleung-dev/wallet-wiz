@@ -14,7 +14,7 @@ export default function Results({ recommendations, answers, onRestart, onPrivacy
         maxWidth: 780,
         width: '100%',
         margin: '0 auto',
-        padding: '100px 24px 48px',
+        padding: 'clamp(72px, 18vw, 100px) 20px 48px',
       }}>
         <div style={{
           marginBottom: 32,
@@ -56,7 +56,7 @@ export default function Results({ recommendations, answers, onRestart, onPrivacy
           <span style={{ color: 'var(--accent)', fontSize: '0.8rem', flexShrink: 0, marginTop: 1 }}>ⓘ</span>
           <p style={{
             fontFamily: 'var(--font)',
-            fontSize: '0.78rem',
+            fontSize: '0.82rem',
             fontWeight: 400,
             color: 'var(--text-muted)',
             lineHeight: 1.55,
@@ -97,7 +97,7 @@ export default function Results({ recommendations, answers, onRestart, onPrivacy
               background: 'none',
               border: '1px solid var(--card-border)',
               borderRadius: 40,
-              padding: '10px 28px',
+              padding: '12px 28px',
               cursor: 'pointer',
               transition: 'all 0.2s',
             }}
@@ -127,14 +127,14 @@ function Stars({ rating }) {
       {[1, 2, 3, 4, 5].map(n => {
         const fill = Math.min(1, Math.max(0, rating - (n - 1)))
         return (
-          <div key={n} style={{ position: 'relative', width: 13, height: 13 }}>
-            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+          <div key={n} style={{ position: 'relative', width: 15, height: 15 }}>
+            <svg width="15" height="15" viewBox="0 0 14 14" fill="none">
               <path d="M7 1l1.5 4H13L9.5 8l1.5 4L7 10l-4 2 1.5-4L1 5h4.5z"
                 stroke="var(--text-muted)" strokeWidth="1" fill="none" />
             </svg>
             {fill > 0 && (
               <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', width: `${fill * 100}%` }}>
-                <svg width="13" height="13" viewBox="0 0 14 14">
+                <svg width="15" height="15" viewBox="0 0 14 14">
                   <path d="M7 1l1.5 4H13L9.5 8l1.5 4L7 10l-4 2 1.5-4L1 5h4.5z" fill="var(--accent)" />
                 </svg>
               </div>
@@ -301,11 +301,11 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
         <div style={{ padding: '0 20px 16px', display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {reasons.map((r, i) => (
             <span key={i} style={{
-              fontFamily: 'var(--font)', fontSize: '0.72rem', fontWeight: 500,
+              fontFamily: 'var(--font)', fontSize: '0.75rem', fontWeight: 500,
               color: 'var(--text-secondary)',
               background: 'var(--option-bg)',
               border: '1px solid var(--option-border)',
-              borderRadius: 20, padding: '2px 10px',
+              borderRadius: 20, padding: '3px 10px',
             }}>
               {r}
             </span>
