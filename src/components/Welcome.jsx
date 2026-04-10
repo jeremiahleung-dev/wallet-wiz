@@ -35,8 +35,8 @@ export default function Welcome({ onStart, onPrivacy }) {
           width: 'min(240px, 64vw)',
           aspectRatio: '240 / 148',
           borderRadius: 18,
-          background: 'linear-gradient(135deg, #3730A3 0%, #5B47F5 50%, #A78BFA 100%)',
-          boxShadow: '0 24px 60px rgba(91, 71, 245, 0.22), 0 4px 16px rgba(91, 71, 245, 0.12)',
+          background: 'linear-gradient(135deg, #0B2A6B 0%, #1B4FBB 55%, #3A72D4 100%)',
+          boxShadow: '0 24px 60px rgba(15, 50, 130, 0.28), 0 4px 16px rgba(15, 50, 130, 0.14)',
           position: 'relative',
           marginBottom: 52,
           animation: 'cardFloat 4s ease-in-out infinite',
@@ -147,8 +147,8 @@ export default function Welcome({ onStart, onPrivacy }) {
             transition: 'all 0.2s ease',
             letterSpacing: '0.01em',
             boxShadow: hovered
-              ? '0 8px 32px rgba(91, 71, 245, 0.35)'
-              : '0 4px 20px rgba(91, 71, 245, 0.18)',
+              ? '0 8px 32px rgba(27, 79, 187, 0.40)'
+              : '0 4px 20px rgba(27, 79, 187, 0.22)',
             transform: hovered ? 'translateY(-1px)' : 'none',
             animation: 'fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both',
           }}
