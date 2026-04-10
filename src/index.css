@@ -20,10 +20,10 @@
   --accent: #4F87E8;
   --accent-dim: rgba(79, 135, 232, 0.12);
   --accent-hover: #6A9AEE;
-  --option-bg: rgba(220, 230, 245, 0.07);
-  --option-hover: rgba(220, 230, 245, 0.12);
-  --option-selected: rgba(79, 135, 232, 0.15);
-  --option-border: rgba(200, 220, 245, 0.14);
+  --option-bg: rgba(240, 243, 247, 0.92);
+  --option-hover: rgba(255, 255, 255, 0.97);
+  --option-selected: rgba(255, 255, 255, 0.97);
+  --option-border: rgba(0, 0, 0, 0.08);
   --option-selected-border: #4F87E8;
   --progress-track: #1B2C44;
   --progress-fill: #4F87E8;

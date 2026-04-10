@@ -138,7 +138,7 @@ function OptionCard({ option, isSelected, onClick }) {
         fontFamily: 'var(--font)',
         fontSize: '0.98rem',
         fontWeight: 600,
-        color: isSelected ? 'var(--accent)' : 'var(--text-primary)',
+        color: isSelected ? 'var(--accent)' : '#0B1A35',
         marginBottom: option.description ? 5 : 0,
         transition: 'color 0.18s',
         lineHeight: 1.3,
@@ -150,7 +150,7 @@ function OptionCard({ option, isSelected, onClick }) {
           fontFamily: 'var(--font)',
           fontSize: '0.8rem',
           fontWeight: 400,
-          color: 'var(--text-secondary)',
+          color: '#516278',
           lineHeight: 1.45,
         }}>
           {option.description}
