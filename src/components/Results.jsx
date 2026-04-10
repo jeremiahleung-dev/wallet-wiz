@@ -11,28 +11,30 @@ export default function Results({ recommendations, answers, onRestart, onPrivacy
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <div style={{
         flex: 1,
-        maxWidth: 760,
+        maxWidth: 780,
         width: '100%',
         margin: '0 auto',
         padding: '100px 24px 48px',
       }}>
         <div style={{
-          marginBottom: 36,
+          marginBottom: 32,
           animation: 'fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both',
         }}>
           <h2 style={{
-            fontFamily: 'var(--font)',
-            fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
-            fontWeight: 400,
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
+            fontWeight: 800,
             color: 'var(--text-primary)',
-            lineHeight: 1.2,
-            marginBottom: 8,
+            lineHeight: 1.1,
+            marginBottom: 10,
+            letterSpacing: '-0.03em',
           }}>
             Your recommendations.
           </h2>
           <p style={{
             fontFamily: 'var(--font)',
             fontSize: '0.95rem',
+            fontWeight: 400,
             color: 'var(--text-secondary)',
           }}>
             Ranked by how well they match your profile. Tap any card to see details and reviews.
@@ -44,8 +46,8 @@ export default function Results({ recommendations, answers, onRestart, onPrivacy
           background: 'var(--surface)',
           border: '1px solid var(--card-border)',
           borderRadius: 10,
-          padding: '12px 16px',
-          marginBottom: 24,
+          padding: '11px 16px',
+          marginBottom: 20,
           display: 'flex',
           gap: 10,
           alignItems: 'flex-start',
@@ -55,6 +57,7 @@ export default function Results({ recommendations, answers, onRestart, onPrivacy
           <p style={{
             fontFamily: 'var(--font)',
             fontSize: '0.78rem',
+            fontWeight: 400,
             color: 'var(--text-muted)',
             lineHeight: 1.55,
           }}>
@@ -62,7 +65,7 @@ export default function Results({ recommendations, answers, onRestart, onPrivacy
           </p>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {recommendations.map((card, i) => (
             <ResultCard
               key={card.id}
@@ -83,12 +86,13 @@ export default function Results({ recommendations, answers, onRestart, onPrivacy
           ))}
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: 48 }}>
+        <div style={{ textAlign: 'center', marginTop: 52 }}>
           <button
             onClick={onRestart}
             style={{
               fontFamily: 'var(--font)',
-              fontSize: '0.9rem',
+              fontSize: '0.88rem',
+              fontWeight: 500,
               color: 'var(--text-muted)',
               background: 'none',
               border: '1px solid var(--card-border)',
@@ -123,21 +127,15 @@ function Stars({ rating }) {
       {[1, 2, 3, 4, 5].map(n => {
         const fill = Math.min(1, Math.max(0, rating - (n - 1)))
         return (
-          <div key={n} style={{ position: 'relative', width: 14, height: 14 }}>
-            {/* Empty star */}
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <div key={n} style={{ position: 'relative', width: 13, height: 13 }}>
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
               <path d="M7 1l1.5 4H13L9.5 8l1.5 4L7 10l-4 2 1.5-4L1 5h4.5z"
                 stroke="var(--text-muted)" strokeWidth="1" fill="none" />
             </svg>
-            {/* Filled star — clipped to fill% */}
             {fill > 0 && (
-              <div style={{
-                position: 'absolute', inset: 0,
-                overflow: 'hidden', width: `${fill * 100}%`,
-              }}>
-                <svg width="14" height="14" viewBox="0 0 14 14">
-                  <path d="M7 1l1.5 4H13L9.5 8l1.5 4L7 10l-4 2 1.5-4L1 5h4.5z"
-                    fill="var(--accent)" />
+              <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', width: `${fill * 100}%` }}>
+                <svg width="13" height="13" viewBox="0 0 14 14">
+                  <path d="M7 1l1.5 4H13L9.5 8l1.5 4L7 10l-4 2 1.5-4L1 5h4.5z" fill="var(--accent)" />
                 </svg>
               </div>
             )}
@@ -151,46 +149,26 @@ function Stars({ rating }) {
 // ── Review panel ───────────────────────────────────────────────────────────
 function ReviewPanel({ card }) {
   const [hovered, setHovered] = useState(false)
-
   if (!card.rating) return null
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 16,
-    }}>
-      {/* Rating header */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
           <Stars rating={card.rating} />
           <span style={{
-            fontFamily: 'var(--font)',
-            fontSize: '1rem',
-            fontWeight: 600,
-            color: 'var(--text-primary)',
+            fontFamily: 'var(--font)', fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)',
           }}>
             {card.rating.toFixed(1)}
           </span>
-          <span style={{
-            fontFamily: 'var(--font)',
-            fontSize: '0.78rem',
-            color: 'var(--text-muted)',
-          }}>
-            / 5
-          </span>
+          <span style={{ fontFamily: 'var(--font)', fontSize: '0.78rem', color: 'var(--text-muted)' }}>/ 5</span>
         </div>
-        <p style={{
-          fontFamily: 'var(--font)',
-          fontSize: '0.75rem',
-          color: 'var(--text-muted)',
-        }}>
+        <p style={{ fontFamily: 'var(--font)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
           {card.ratingCount} reviews · {card.ratingSource}
         </p>
       </div>
 
-      {/* Review snippets */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {card.reviewHighlights?.map((highlight, i) => (
           <div key={i} style={{
             background: 'var(--surface)',
@@ -198,19 +176,13 @@ function ReviewPanel({ card }) {
             borderRadius: 10,
             padding: '12px 14px',
           }}>
-            <p style={{
-              fontFamily: 'var(--font)',
-              fontSize: '0.82rem',
-              color: 'var(--text-secondary)',
-              lineHeight: 1.6,
-            }}>
+            <p style={{ fontFamily: 'var(--font)', fontSize: '0.82rem', fontWeight: 400, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
               "{highlight}"
             </p>
           </div>
         ))}
       </div>
 
-      {/* Read more link */}
       {card.reviewUrl && (
         <a
           href={card.reviewUrl}
@@ -219,14 +191,10 @@ function ReviewPanel({ card }) {
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 5,
-            fontFamily: 'var(--font)',
-            fontSize: '0.82rem',
+            display: 'inline-flex', alignItems: 'center', gap: 5,
+            fontFamily: 'var(--font)', fontSize: '0.82rem', fontWeight: 500,
             color: hovered ? 'var(--accent-hover)' : 'var(--accent)',
-            textDecoration: 'none',
-            transition: 'color 0.2s',
+            textDecoration: 'none', transition: 'color 0.2s',
           }}
         >
           Read all reviews on {card.ratingSource}
@@ -247,8 +215,9 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
     <div
       style={{
         background: 'var(--card-bg)',
-        border: `1px solid ${isExpanded ? 'var(--accent)' : hovered ? 'var(--text-muted)' : 'var(--card-border)'}`,
-        borderRadius: 16,
+        border: `1.5px solid ${isExpanded ? 'var(--accent)' : hovered ? 'var(--text-muted)' : 'var(--card-border)'}`,
+        borderLeft: rank === 0 ? `3px solid var(--accent)` : undefined,
+        borderRadius: 14,
         overflow: 'hidden',
         transition: 'border-color 0.2s ease',
         animation: `fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${rank * 0.07}s both`,
@@ -259,15 +228,16 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
       onMouseLeave={() => setHovered(false)}
     >
       {/* Collapsed row */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '20px 20px' }}>
-        {/* Rank */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '18px 20px' }}>
+        {/* Rank badge */}
         <div style={{
-          flexShrink: 0, width: 30, height: 30, borderRadius: '50%',
-          background: rank === 0 ? 'var(--accent-dim)' : 'var(--surface)',
-          border: `1px solid ${rank === 0 ? 'var(--accent)' : 'var(--card-border)'}`,
+          flexShrink: 0,
+          width: 28, height: 28,
+          borderRadius: 8,
+          background: rank === 0 ? 'var(--accent)' : 'var(--option-bg)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: 'var(--font)', fontSize: '0.82rem',
-          color: rank === 0 ? 'var(--accent)' : 'var(--text-muted)',
+          fontFamily: 'var(--font-display)', fontSize: '0.78rem', fontWeight: 700,
+          color: rank === 0 ? '#FFFFFF' : 'var(--text-muted)',
         }}>
           {rank + 1}
         </div>
@@ -275,26 +245,28 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
         {/* Name + tag */}
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 3 }}>
-            <span style={{ fontFamily: 'var(--font)', fontSize: '1.05rem', fontWeight: 500, color: 'var(--text-primary)' }}>
+            <span style={{ fontFamily: 'var(--font)', fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
               {card.name}
             </span>
             {rank === 0 && (
               <span style={{
-                fontFamily: 'var(--font)', fontSize: '0.68rem', color: 'var(--accent)',
-                border: '1px solid var(--accent)', borderRadius: 20, padding: '1px 8px', letterSpacing: '0.06em',
+                fontFamily: 'var(--font)', fontSize: '0.68rem', fontWeight: 600,
+                color: 'var(--accent)',
+                background: 'var(--accent-dim)',
+                borderRadius: 20, padding: '2px 9px', letterSpacing: '0.04em',
               }}>
                 Top Pick
               </span>
             )}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-            <span style={{ fontFamily: 'var(--font)', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+            <span style={{ fontFamily: 'var(--font)', fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>
               {card.tag}
             </span>
             {card.rating && (
               <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                 <Stars rating={card.rating} />
-                <span style={{ fontFamily: 'var(--font)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                <span style={{ fontFamily: 'var(--font)', fontSize: '0.72rem', fontWeight: 400, color: 'var(--text-muted)' }}>
                   {card.rating.toFixed(1)}
                 </span>
               </span>
@@ -305,19 +277,19 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
         {/* Fee + issuer */}
         <div style={{ flexShrink: 0, textAlign: 'right' }}>
           <div style={{
-            fontFamily: 'var(--font)', fontSize: '0.9rem', fontWeight: 500,
+            fontFamily: 'var(--font)', fontSize: '0.88rem', fontWeight: 600,
             color: card.annualFee === 0 ? 'var(--text-secondary)' : 'var(--text-primary)',
           }}>
             {card.annualFee === 0 ? 'No fee' : `$${card.annualFee}/yr`}
           </div>
-          <div style={{ fontFamily: 'var(--font)', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+          <div style={{ fontFamily: 'var(--font)', fontSize: '0.7rem', fontWeight: 400, color: 'var(--text-muted)' }}>
             {card.issuer}
           </div>
         </div>
 
         {/* Chevron */}
         <div style={{
-          flexShrink: 0, color: 'var(--text-muted)', fontSize: '0.85rem',
+          flexShrink: 0, color: 'var(--text-muted)', fontSize: '0.8rem',
           transform: isExpanded ? 'rotate(180deg)' : 'none', transition: 'transform 0.25s ease',
         }}>
           ↓
@@ -329,8 +301,10 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
         <div style={{ padding: '0 20px 16px', display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {reasons.map((r, i) => (
             <span key={i} style={{
-              fontFamily: 'var(--font)', fontSize: '0.75rem', color: 'var(--text-secondary)',
-              background: 'var(--surface)', border: '1px solid var(--card-border)',
+              fontFamily: 'var(--font)', fontSize: '0.72rem', fontWeight: 500,
+              color: 'var(--text-secondary)',
+              background: 'var(--option-bg)',
+              border: '1px solid var(--option-border)',
               borderRadius: 20, padding: '2px 10px',
             }}>
               {r}
@@ -368,7 +342,7 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
                   {card.keyBenefits.map((b, i) => (
                     <li key={i} style={{
                       display: 'flex', gap: 10,
-                      fontFamily: 'var(--font)', fontSize: '0.9rem',
+                      fontFamily: 'var(--font)', fontSize: '0.88rem', fontWeight: 400,
                       color: 'var(--text-primary)', lineHeight: 1.5,
                     }}>
                       <span style={{ color: 'var(--accent)', flexShrink: 0 }}>—</span>
@@ -393,9 +367,9 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
                       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                       width: '100%', padding: '13px 24px',
                       background: applyHovered ? 'var(--accent-hover)' : 'var(--accent)',
-                      color: 'var(--bg)',
-                      fontFamily: 'var(--font)', fontSize: '0.95rem', fontWeight: 500,
-                      letterSpacing: '0.02em', borderRadius: 10, textDecoration: 'none',
+                      color: '#FFFFFF',
+                      fontFamily: 'var(--font)', fontSize: '0.92rem', fontWeight: 600,
+                      letterSpacing: '0.01em', borderRadius: 10, textDecoration: 'none',
                       transition: 'background 0.2s ease',
                     }}
                   >
@@ -403,8 +377,8 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
                     <span style={{ fontSize: '0.85rem' }}>↗</span>
                   </a>
                   <p style={{
-                    fontFamily: 'var(--font)', fontSize: '0.72rem', color: 'var(--text-muted)',
-                    textAlign: 'center', lineHeight: 1.5, marginTop: -12,
+                    fontFamily: 'var(--font)', fontSize: '0.72rem', fontWeight: 400,
+                    color: 'var(--text-muted)', textAlign: 'center', lineHeight: 1.5, marginTop: -12,
                   }}>
                     You'll be redirected to {card.issuer}'s secure site. Approval is at the issuer's discretion.
                   </p>
@@ -424,8 +398,9 @@ function ResultCard({ card, rank, answers, isExpanded, onToggle }) {
 function Label({ children }) {
   return (
     <div style={{
-      fontFamily: 'var(--font)', fontSize: '0.68rem', letterSpacing: '0.14em',
-      color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 7,
+      fontFamily: 'var(--font)', fontSize: '0.68rem', fontWeight: 600,
+      letterSpacing: '0.12em', color: 'var(--text-muted)',
+      textTransform: 'uppercase', marginBottom: 7,
     }}>
       {children}
     </div>
@@ -436,7 +411,7 @@ function Detail({ label, value }) {
   return (
     <div>
       <Label>{label}</Label>
-      <p style={{ fontFamily: 'var(--font)', fontSize: '0.92rem', color: 'var(--text-primary)', lineHeight: 1.6 }}>
+      <p style={{ fontFamily: 'var(--font)', fontSize: '0.9rem', fontWeight: 400, color: 'var(--text-primary)', lineHeight: 1.6 }}>
         {value}
       </p>
     </div>

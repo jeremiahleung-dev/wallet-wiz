@@ -1,7 +1,7 @@
 export default function Footer({ onPrivacy }) {
   return (
     <footer style={{
-      padding: '32px 36px',
+      padding: '28px 36px',
       borderTop: '1px solid var(--card-border)',
       display: 'flex',
       alignItems: 'center',
@@ -11,19 +11,21 @@ export default function Footer({ onPrivacy }) {
     }}>
       <p style={{
         fontFamily: 'var(--font)',
-        fontSize: '0.78rem',
+        fontSize: '0.76rem',
+        fontWeight: 400,
         color: 'var(--text-muted)',
         lineHeight: 1.6,
         maxWidth: 560,
       }}>
         Card links are provided for reference only. We do not earn any commission. Recommendations are not financial advice. Always review the full terms on the issuer's website before applying.
       </p>
-      <div style={{ display: 'flex', gap: 20, flexShrink: 0 }}>
+      <div style={{ display: 'flex', gap: 20, flexShrink: 0, alignItems: 'center' }}>
         <button
           onClick={onPrivacy}
           style={{
             fontFamily: 'var(--font)',
-            fontSize: '0.78rem',
+            fontSize: '0.76rem',
+            fontWeight: 500,
             color: 'var(--text-muted)',
             background: 'none',
             border: 'none',
@@ -36,8 +38,8 @@ export default function Footer({ onPrivacy }) {
         >
           Privacy Policy
         </button>
-        <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem', fontFamily: 'var(--font)' }}>
-          © {new Date().getFullYear()} Wallet Wiz
+        <span style={{ color: 'var(--text-muted)', fontSize: '0.76rem', fontFamily: 'var(--font)', fontWeight: 400 }}>
+          © {new Date().getFullYear()} optimal
         </span>
       </div>
     </footer>

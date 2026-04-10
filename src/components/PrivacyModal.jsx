@@ -13,7 +13,7 @@ const Section = ({ title, children }) => (
       {title}
     </h3>
     <div style={{
-      fontFamily: 'var(--font)',
+      fontFamily: 'var(--font)', fontWeight: 400,
       fontSize: '0.9rem',
       color: 'var(--text-secondary)',
       lineHeight: 1.7,
@@ -91,7 +91,7 @@ export default function PrivacyModal({ onClose }) {
             onClick={onClose}
             aria-label="Close"
             style={{
-              fontFamily: 'var(--font)',
+              fontFamily: 'var(--font)', fontWeight: 400,
               fontSize: '1.2rem',
               color: 'var(--text-muted)',
               background: 'none',
@@ -112,7 +112,7 @@ export default function PrivacyModal({ onClose }) {
         {/* Body */}
         <div style={{ padding: '28px 32px 32px' }}>
           <p style={{
-            fontFamily: 'var(--font)',
+            fontFamily: 'var(--font)', fontWeight: 400,
             fontSize: '0.82rem',
             color: 'var(--text-muted)',
             marginBottom: 28,
@@ -121,7 +121,7 @@ export default function PrivacyModal({ onClose }) {
           </p>
 
           <Section title="What we collect">
-            <p>Wallet Wiz does not collect, store, or transmit any personally identifiable information. Your survey answers (credit score range, spending habits, lifestyle preferences) are processed entirely in your browser and are never sent to our servers.</p>
+            <p>optimal does not collect, store, or transmit any personally identifiable information. Your survey answers (credit score range, spending habits, lifestyle preferences) are processed entirely in your browser and are never sent to our servers.</p>
             <br />
             <p>We use Vercel Analytics to collect anonymous, aggregate usage data — such as how many people complete the survey or which screens are visited. This data contains no personal identifiers and cannot be traced back to any individual user. Vercel Analytics does not use cookies.</p>
           </Section>
@@ -142,21 +142,21 @@ export default function PrivacyModal({ onClose }) {
           </Section>
 
           <Section title="Card links">
-            <p>Card recommendations include links to issuer application pages for your convenience. These links are provided for reference only — Wallet Wiz does not earn any commission or compensation of any kind when you click or apply through them.</p>
+            <p>Card recommendations include links to issuer application pages for your convenience. These links are provided for reference only — optimal does not earn any commission or compensation of any kind when you click or apply through them.</p>
             <br />
             <p>You should always review the full terms, conditions, and current offers directly on the issuer's website before applying.</p>
           </Section>
 
           <Section title="Not financial advice">
-            <p>Nothing on Wallet Wiz constitutes financial, legal, or credit advice. Card recommendations are informational only. Approval is not guaranteed and is determined solely by the card issuer based on your full credit profile.</p>
+            <p>Nothing on optimal constitutes financial, legal, or credit advice. Card recommendations are informational only. Approval is not guaranteed and is determined solely by the card issuer based on your full credit profile.</p>
           </Section>
 
           <Section title="Third-party links">
-            <p>When you click "Apply Now," you leave Wallet Wiz and are directed to the card issuer's website. We are not responsible for the content, privacy practices, or data handling of third-party sites.</p>
+            <p>When you click "Apply Now," you leave optimal and are directed to the card issuer's website. We are not responsible for the content, privacy practices, or data handling of third-party sites.</p>
           </Section>
 
           <Section title="Changes to this policy">
-            <p>We may update this policy as the product evolves. Continued use of Wallet Wiz after changes are posted constitutes acceptance of the updated policy.</p>
+            <p>We may update this policy as the product evolves. Continued use of optimal after changes are posted constitutes acceptance of the updated policy.</p>
           </Section>
 
           <Section title="Contact">

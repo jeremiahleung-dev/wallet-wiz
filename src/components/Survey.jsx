@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import { questions } from '../data/questions'
 import QuestionCard from './QuestionCard'
-import WalletShuffle from './WalletShuffle'
 import { trackEvent, Events } from '../utils/track'
 
 export default function Survey({ onComplete }) {
@@ -51,20 +50,25 @@ export default function Survey({ onComplete }) {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '80px 24px 40px',
+      padding: '100px 32px 60px',
     }}>
-      <WalletShuffle />
-
-      {/* Progress counter */}
+      {/* Segmented progress bar */}
       <div style={{
-        fontFamily: 'var(--font)',
-        fontSize: '0.78rem',
-        color: 'var(--text-muted)',
-        letterSpacing: '0.1em',
-        marginBottom: 28,
-        marginTop: -8,
+        display: 'flex',
+        gap: 5,
+        marginBottom: 64,
+        width: '100%',
+        maxWidth: 400,
       }}>
-        {index + 1} / {questions.length}
+        {questions.map((_, i) => (
+          <div key={i} style={{
+            height: 3,
+            flex: 1,
+            borderRadius: 2,
+            background: i <= index ? 'var(--progress-fill)' : 'var(--progress-track)',
+            transition: 'background 0.35s ease',
+          }} />
+        ))}
       </div>
 
       <QuestionCard

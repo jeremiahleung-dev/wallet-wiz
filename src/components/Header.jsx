@@ -9,7 +9,7 @@ export default function Header({ theme, onToggleTheme, onHome }) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '24px 36px',
+      padding: '20px 32px',
       pointerEvents: 'none',
     }}>
       <button
@@ -20,40 +20,38 @@ export default function Header({ theme, onToggleTheme, onHome }) {
           background: 'none',
           border: 'none',
           cursor: 'pointer',
-          padding: 4,
-          color: 'var(--accent)',
-          display: 'flex',
-          alignItems: 'center',
+          padding: '4px 0',
+          fontFamily: 'var(--font-display)',
+          fontSize: '1.05rem',
+          fontWeight: 700,
+          color: 'var(--text-primary)',
+          letterSpacing: '-0.02em',
           transition: 'opacity 0.2s',
-          borderRadius: 6,
         }}
-        onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
+        onMouseEnter={e => e.currentTarget.style.opacity = '0.5'}
         onMouseLeave={e => e.currentTarget.style.opacity = '1'}
       >
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="6" width="20" height="14" rx="3" />
-          <path d="M2 10h20" />
-          <path d="M16 14h.01" strokeWidth="2.5" />
-          <path d="M2 6l4-3h12l4 3" />
-        </svg>
+        optimal
       </button>
 
       <button
         onClick={onToggleTheme}
-        aria-label="Toggle theme"
+        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
         style={{
           pointerEvents: 'auto',
-          background: 'none',
+          background: 'var(--card-bg)',
           border: '1px solid var(--card-border)',
-          borderRadius: '20px',
-          padding: '6px 14px',
+          borderRadius: '50%',
+          width: 36,
+          height: 36,
           cursor: 'pointer',
-          fontFamily: 'var(--font)',
-          fontSize: '0.85rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           color: 'var(--text-secondary)',
           transition: 'all 0.2s ease',
-          backdropFilter: 'blur(8px)',
-          backgroundColor: 'var(--surface)',
+          boxShadow: 'var(--shadow)',
+          flexShrink: 0,
         }}
         onMouseEnter={e => {
           e.currentTarget.style.color = 'var(--text-primary)'
@@ -64,7 +62,16 @@ export default function Header({ theme, onToggleTheme, onHome }) {
           e.currentTarget.style.borderColor = 'var(--card-border)'
         }}
       >
-        {theme === 'dark' ? '☀ Light' : '◗ Dark'}
+        {theme === 'dark' ? (
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+          </svg>
+        ) : (
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        )}
       </button>
     </header>
   )

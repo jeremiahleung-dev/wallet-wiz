@@ -2,10 +2,12 @@ import { useState } from 'react'
 import Footer from './Footer'
 
 const steps = [
-  { n: '01', label: 'Answer six quick questions about your credit and goals' },
-  { n: '02', label: 'Our algorithm matches your profile against 15+ cards' },
-  { n: '03', label: 'Get a ranked list of cards tailored specifically to you' },
+  { n: '01', label: 'Answer six quick questions about your credit profile and goals' },
+  { n: '02', label: 'Our algorithm scores your profile against 70 cards' },
+  { n: '03', label: 'Get a ranked list of cards matched specifically to you' },
 ]
+
+const stats = ['6 questions', '70 cards', 'no data stored']
 
 export default function Welcome({ onStart, onPrivacy }) {
   const [hovered, setHovered] = useState(false)
@@ -15,8 +17,9 @@ export default function Welcome({ onStart, onPrivacy }) {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
+      backgroundImage: 'radial-gradient(circle, var(--card-border) 1px, transparent 1px)',
+      backgroundSize: '28px 28px',
     }}>
-      {/* Hero */}
       <div style={{
         flex: 1,
         display: 'flex',
@@ -26,72 +29,106 @@ export default function Welcome({ onStart, onPrivacy }) {
         padding: '120px 24px 60px',
         textAlign: 'center',
       }}>
-        {/* Card stack */}
-        <div style={{ position: 'relative', width: 280, height: 168, marginBottom: 56 }}>
-          {[2, 1, 0].map(i => (
-            <div key={i} style={{
-              position: 'absolute',
-              width: 280,
-              height: 168,
-              borderRadius: 16,
-              background: i === 0
-                ? 'linear-gradient(135deg, #1a1a2e 0%, #c8a96e 100%)'
-                : i === 1
-                ? 'linear-gradient(135deg, #0a1628 0%, #1e3a5f 100%)'
-                : 'linear-gradient(135deg, #0d0d0d 0%, #4a0080 100%)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              transform: `rotate(${(i - 1) * 6}deg) translateY(${i * 4}px)`,
-              boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
-              animation: `fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.1}s both`,
-            }}>
-              <div style={{
-                position: 'absolute',
-                top: 24,
-                left: 24,
-                width: 36,
-                height: 28,
-                borderRadius: 5,
-                background: 'rgba(255,255,255,0.12)',
-                border: '1px solid rgba(255,255,255,0.18)',
-              }} />
-              <div style={{
-                position: 'absolute',
-                bottom: 20,
-                left: 24,
-                fontFamily: 'monospace',
-                fontSize: '0.7rem',
-                letterSpacing: '0.18em',
-                color: 'rgba(255,255,255,0.3)',
-              }}>
-                •••• •••• •••• ••••
-              </div>
+
+        {/* Floating card */}
+        <div style={{
+          width: 240,
+          height: 148,
+          borderRadius: 18,
+          background: 'linear-gradient(135deg, #3730A3 0%, #5B47F5 50%, #A78BFA 100%)',
+          boxShadow: '0 24px 60px rgba(91, 71, 245, 0.22), 0 4px 16px rgba(91, 71, 245, 0.12)',
+          position: 'relative',
+          marginBottom: 52,
+          animation: 'cardFloat 4s ease-in-out infinite',
+          border: '1px solid rgba(255,255,255,0.15)',
+          overflow: 'hidden',
+          flexShrink: 0,
+        }}>
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 55%)',
+            pointerEvents: 'none',
+          }} />
+          <div style={{
+            position: 'absolute', top: 20, left: 22,
+            fontFamily: 'var(--font-display)',
+            fontSize: '0.85rem', fontWeight: 700,
+            color: 'rgba(255,255,255,0.95)',
+            letterSpacing: '-0.01em',
+          }}>optimal</div>
+          <div style={{
+            position: 'absolute', bottom: 42, left: 22,
+            width: 30, height: 22, borderRadius: 4,
+            background: 'rgba(255,255,255,0.22)',
+            border: '1px solid rgba(255,255,255,0.3)',
+          }} />
+          <div style={{
+            position: 'absolute', bottom: 24, left: 22,
+            fontFamily: 'monospace', fontSize: '0.68rem',
+            letterSpacing: '0.18em', color: 'rgba(255,255,255,0.35)',
+          }}>•••• •••• •••• ••••</div>
+          <div style={{
+            position: 'absolute', bottom: 20, right: 20,
+            display: 'flex', alignItems: 'center',
+          }}>
+            <div style={{ display: 'flex', position: 'relative', width: 34, height: 22 }}>
+              <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(255,80,80,0.65)', position: 'absolute', left: 0 }} />
+              <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(255,160,50,0.65)', position: 'absolute', left: 12 }} />
             </div>
-          ))}
+          </div>
         </div>
 
         <h1 style={{
-          fontFamily: 'var(--font)',
-          fontSize: 'clamp(2.4rem, 5vw, 3.4rem)',
-          fontWeight: 400,
-          lineHeight: 1.12,
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(2.8rem, 6vw, 4.2rem)',
+          fontWeight: 800,
+          lineHeight: 1.05,
           color: 'var(--text-primary)',
-          marginBottom: 16,
-          animation: 'fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both',
+          marginBottom: 18,
+          letterSpacing: '-0.03em',
+          animation: 'fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both',
         }}>
-          Find your perfect card.
+          Find your<br />perfect card.
         </h1>
 
         <p style={{
           fontFamily: 'var(--font)',
-          fontSize: '1.1rem',
+          fontSize: '1.05rem',
+          fontWeight: 400,
           color: 'var(--text-secondary)',
-          maxWidth: 420,
+          maxWidth: 380,
           lineHeight: 1.65,
-          marginBottom: 48,
-          animation: 'fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both',
+          marginBottom: 32,
+          animation: 'fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both',
         }}>
           Six questions. A personalized recommendation matched to your credit profile, spending habits, and goals.
         </p>
+
+        {/* Stat pills */}
+        <div style={{
+          display: 'flex',
+          gap: 8,
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          marginBottom: 36,
+          animation: 'fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both',
+        }}>
+          {stats.map(stat => (
+            <span key={stat} style={{
+              fontFamily: 'var(--font)',
+              fontSize: '0.8rem',
+              fontWeight: 500,
+              color: 'var(--text-secondary)',
+              background: 'var(--surface)',
+              border: '1px solid var(--card-border)',
+              borderRadius: 100,
+              padding: '5px 14px',
+              boxShadow: 'var(--shadow)',
+            }}>
+              {stat}
+            </span>
+          ))}
+        </div>
 
         <button
           onClick={onStart}
@@ -99,16 +136,21 @@ export default function Welcome({ onStart, onPrivacy }) {
           onMouseLeave={() => setHovered(false)}
           style={{
             fontFamily: 'var(--font)',
-            fontSize: '1rem',
-            color: hovered ? 'var(--bg)' : 'var(--accent)',
-            background: hovered ? 'var(--accent)' : 'transparent',
-            border: '1px solid var(--accent)',
-            borderRadius: '40px',
+            fontSize: '0.95rem',
+            fontWeight: 600,
+            color: '#FFFFFF',
+            background: hovered ? 'var(--accent-hover)' : 'var(--accent)',
+            border: 'none',
+            borderRadius: 12,
             padding: '14px 44px',
             cursor: 'pointer',
-            transition: 'all 0.22s ease',
-            letterSpacing: '0.02em',
-            animation: 'fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both',
+            transition: 'all 0.2s ease',
+            letterSpacing: '0.01em',
+            boxShadow: hovered
+              ? '0 8px 32px rgba(91, 71, 245, 0.35)'
+              : '0 4px 20px rgba(91, 71, 245, 0.18)',
+            transform: hovered ? 'translateY(-1px)' : 'none',
+            animation: 'fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both',
           }}
         >
           Get started →
@@ -117,29 +159,33 @@ export default function Welcome({ onStart, onPrivacy }) {
         {/* How it works */}
         <div style={{
           display: 'flex',
-          gap: 40,
-          marginTop: 72,
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          animation: 'fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both',
+          marginTop: 80,
+          width: '100%',
+          maxWidth: 560,
+          animation: 'fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both',
         }}>
-          {steps.map((step) => (
+          {steps.map((step, i) => (
             <div key={step.n} style={{
+              flex: 1,
               textAlign: 'center',
-              maxWidth: 180,
+              padding: '0 18px',
+              borderRight: i < steps.length - 1 ? '1px solid var(--card-border)' : 'none',
             }}>
               <div style={{
-                fontFamily: 'var(--font)',
-                fontSize: '0.72rem',
-                letterSpacing: '0.14em',
+                fontFamily: 'var(--font-display)',
+                fontSize: '0.65rem',
+                fontWeight: 700,
+                letterSpacing: '0.12em',
                 color: 'var(--accent)',
                 marginBottom: 8,
+                textTransform: 'uppercase',
               }}>
                 {step.n}
               </div>
               <p style={{
                 fontFamily: 'var(--font)',
-                fontSize: '0.88rem',
+                fontSize: '0.8rem',
+                fontWeight: 400,
                 color: 'var(--text-secondary)',
                 lineHeight: 1.55,
               }}>
@@ -152,9 +198,10 @@ export default function Welcome({ onStart, onPrivacy }) {
         <p style={{
           marginTop: 36,
           fontFamily: 'var(--font)',
-          fontSize: '0.78rem',
+          fontSize: '0.75rem',
+          fontWeight: 400,
           color: 'var(--text-muted)',
-          animation: 'fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both',
+          animation: 'fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both',
         }}>
           No personal data collected. No account required.
         </p>

@@ -5,50 +5,51 @@
 }
 
 :root {
-  --font: 'EB Garamond', Georgia, serif;
+  --font-display: 'Syne', sans-serif;
+  --font: 'DM Sans', sans-serif;
 
-  /* Dark mode (default) */
-  --bg: #0e0e0e;
-  --surface: #161616;
-  --card-bg: #1c1c1c;
-  --card-border: #2a2a2a;
-  --text-primary: #f0ead8;
-  --text-secondary: #7a7060;
-  --text-muted: #4a4540;
-  --accent: #c8a96e;
-  --accent-dim: rgba(200, 169, 110, 0.12);
-  --accent-hover: #d9be8a;
-  --option-bg: #1e1e1e;
-  --option-hover: #242424;
-  --option-selected: rgba(200, 169, 110, 0.15);
-  --option-border: #2e2e2e;
-  --option-selected-border: #c8a96e;
-  --progress-track: #222;
-  --progress-fill: #c8a96e;
-  --shadow: 0 4px 32px rgba(0,0,0,0.5);
-  --shadow-card: 0 8px 48px rgba(0,0,0,0.6);
+  /* Light mode — default */
+  --bg: #F9F9FB;
+  --surface: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --card-border: #E4E4EC;
+  --text-primary: #0D0D12;
+  --text-secondary: #6B6B7E;
+  --text-muted: #A8A8B8;
+  --accent: #5B47F5;
+  --accent-dim: rgba(91, 71, 245, 0.08);
+  --accent-hover: #4935E4;
+  --option-bg: #F4F4F9;
+  --option-hover: #EBEBF5;
+  --option-selected: rgba(91, 71, 245, 0.08);
+  --option-border: #E4E4EC;
+  --option-selected-border: #5B47F5;
+  --progress-track: #E4E4EC;
+  --progress-fill: #5B47F5;
+  --shadow: 0 2px 16px rgba(0,0,0,0.06);
+  --shadow-card: 0 8px 40px rgba(0,0,0,0.10);
 }
 
-:root[data-theme='light'] {
-  --bg: #faf8f4;
-  --surface: #f2ede4;
-  --card-bg: #ffffff;
-  --card-border: #e4ddd0;
-  --text-primary: #1a1510;
-  --text-secondary: #7a6e60;
-  --text-muted: #b0a090;
-  --accent: #8b6a1f;
-  --accent-dim: rgba(139, 106, 31, 0.08);
-  --accent-hover: #6b4e12;
-  --option-bg: #f8f5ef;
-  --option-hover: #f0ebe0;
-  --option-selected: rgba(139, 106, 31, 0.1);
-  --option-border: #e0d8cc;
-  --option-selected-border: #8b6a1f;
-  --progress-track: #e4ddd0;
-  --progress-fill: #8b6a1f;
-  --shadow: 0 4px 24px rgba(0,0,0,0.08);
-  --shadow-card: 0 8px 40px rgba(0,0,0,0.12);
+:root[data-theme='dark'] {
+  --bg: #08080A;
+  --surface: #111116;
+  --card-bg: #17171D;
+  --card-border: #24242E;
+  --text-primary: #F0F0F8;
+  --text-secondary: #8888A0;
+  --text-muted: #48485C;
+  --accent: #8B7FF8;
+  --accent-dim: rgba(139, 127, 248, 0.12);
+  --accent-hover: #A89EFB;
+  --option-bg: #1C1C24;
+  --option-hover: #20202C;
+  --option-selected: rgba(139, 127, 248, 0.12);
+  --option-border: #28282E;
+  --option-selected-border: #8B7FF8;
+  --progress-track: #24242E;
+  --progress-fill: #8B7FF8;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-card: 0 8px 48px rgba(0,0,0,0.55);
 }
 
 html, body {
@@ -58,6 +59,7 @@ html, body {
   color: var(--text-primary);
   transition: background 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
@@ -71,51 +73,29 @@ html, body {
   from { transform: translateX(60px); opacity: 0; }
   to   { transform: translateX(0);    opacity: 1; }
 }
-
 @keyframes slideOutLeft {
-  from { transform: translateX(0);    opacity: 1; }
+  from { transform: translateX(0);     opacity: 1; }
   to   { transform: translateX(-60px); opacity: 0; }
 }
-
 @keyframes slideInLeft {
   from { transform: translateX(-60px); opacity: 0; }
   to   { transform: translateX(0);     opacity: 1; }
 }
-
 @keyframes slideOutRight {
   from { transform: translateX(0);    opacity: 1; }
   to   { transform: translateX(60px); opacity: 0; }
 }
-
 @keyframes fadeUp {
-  from { transform: translateY(20px); opacity: 0; }
+  from { transform: translateY(16px); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-@keyframes walletCard1 {
-  0%, 100% { transform: rotate(-4deg) translate(-10px, 5px) scale(0.95); z-index: 1; }
-  33%      { transform: rotate(3deg)  translate(6px, -2px)  scale(1);    z-index: 3; }
-  66%      { transform: rotate(-1deg) translate(-2px, 2px)  scale(0.97); z-index: 2; }
-}
-@keyframes walletCard2 {
-  0%, 100% { transform: rotate(-1deg) translate(-2px, 2px)  scale(0.97); z-index: 2; }
-  33%      { transform: rotate(-4deg) translate(-10px, 5px) scale(0.95); z-index: 1; }
-  66%      { transform: rotate(3deg)  translate(6px, -2px)  scale(1);    z-index: 3; }
-}
-@keyframes walletCard3 {
-  0%, 100% { transform: rotate(3deg)  translate(6px, -2px)  scale(1);    z-index: 3; }
-  33%      { transform: rotate(-1deg) translate(-2px, 2px)  scale(0.97); z-index: 2; }
-  66%      { transform: rotate(-4deg) translate(-10px, 5px) scale(0.95); z-index: 1; }
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0px) rotate(-1.5deg); }
+  50%       { transform: translateY(-10px) rotate(1deg); }
 }
 
 .anim-slide-in-right  { animation: slideInRight  0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
