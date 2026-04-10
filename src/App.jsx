@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Header from './components/Header'
 import Welcome from './components/Welcome'
 import Survey from './components/Survey'
@@ -10,19 +10,12 @@ import { getSavedIds, toggleSaved, clearSaved } from './utils/savedCards'
 import { trackEvent, Events } from './utils/track'
 
 export default function App() {
-  const [theme, setTheme] = useState('light')
   const [screen, setScreen] = useState('welcome')
   const [leaving, setLeaving] = useState(false)
   const [recommendations, setRecommendations] = useState([])
   const [answers, setAnswers] = useState({})
   const [showPrivacy, setShowPrivacy] = useState(false)
   const [savedIds, setSavedIds] = useState(() => getSavedIds())
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
-
-  const handleToggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark')
 
   const handleStart = () => {
     trackEvent(Events.SURVEY_STARTED)
@@ -90,8 +83,6 @@ export default function App() {
   return (
     <>
       <Header
-        theme={theme}
-        onToggleTheme={handleToggleTheme}
         onHome={handleRestart}
         savedCount={savedIds.length}
         onMyCards={handleOpenMyCards}

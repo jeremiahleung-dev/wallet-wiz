@@ -30,34 +30,11 @@
   --shadow-card: 0 8px 40px rgba(0,0,0,0.10);
 }
 
-:root[data-theme='dark'] {
-  --bg: #08080A;
-  --surface: #111116;
-  --card-bg: #17171D;
-  --card-border: #24242E;
-  --text-primary: #F0F0F8;
-  --text-secondary: #8888A0;
-  --text-muted: #48485C;
-  --accent: #8B7FF8;
-  --accent-dim: rgba(139, 127, 248, 0.12);
-  --accent-hover: #A89EFB;
-  --option-bg: #1C1C24;
-  --option-hover: #20202C;
-  --option-selected: rgba(139, 127, 248, 0.12);
-  --option-border: #28282E;
-  --option-selected-border: #8B7FF8;
-  --progress-track: #24242E;
-  --progress-fill: #8B7FF8;
-  --shadow: 0 4px 24px rgba(0,0,0,0.4);
-  --shadow-card: 0 8px 48px rgba(0,0,0,0.55);
-}
-
 html, body {
   height: 100%;
   font-family: var(--font);
   background: var(--bg);
   color: var(--text-primary);
-  transition: background 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
