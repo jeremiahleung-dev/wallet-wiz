@@ -9,7 +9,7 @@ import { trackEvent, Events } from './utils/track'
 import { cards as staticCards } from './data/cards'
 
 export default function App() {
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState('dark')
   const [screen, setScreen] = useState('welcome')
   const [recommendations, setRecommendations] = useState([])
   const [answers, setAnswers] = useState({})
