@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Header from './components/Header'
 import Welcome from './components/Welcome'
 import Survey from './components/Survey'
@@ -6,6 +6,7 @@ import Results from './components/Results'
 import PrivacyModal from './components/PrivacyModal'
 import { getRecommendations } from './utils/recommend'
 import { trackEvent, Events } from './utils/track'
+import { cards as staticCards } from './data/cards'
 
 export default function App() {
   const [theme, setTheme] = useState('light')
@@ -13,10 +14,18 @@ export default function App() {
   const [recommendations, setRecommendations] = useState([])
   const [answers, setAnswers] = useState({})
   const [showPrivacy, setShowPrivacy] = useState(false)
+  const liveCardsRef = useRef(staticCards)
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
+
+  useEffect(() => {
+    fetch('/api/cards')
+      .then(res => res.ok ? res.json() : Promise.reject(res.status))
+      .then(data => { liveCardsRef.current = data })
+      .catch(() => { /* silent fallback — liveCardsRef keeps static data */ })
+  }, [])
 
   const handleToggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark')
 
@@ -26,7 +35,7 @@ export default function App() {
   }
 
   const handleSurveyComplete = (surveyAnswers) => {
-    const recs = getRecommendations(surveyAnswers)
+    const recs = getRecommendations(surveyAnswers, liveCardsRef.current)
     setAnswers(surveyAnswers)
     setRecommendations(recs)
     trackEvent(Events.RESULTS_VIEWED, {

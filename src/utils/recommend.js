@@ -1,6 +1,6 @@
-import { cards, SCORE_ORDER } from '../data/cards'
+import { cards as staticCards, SCORE_ORDER } from '../data/cards'
 
-export function getRecommendations(answers) {
+export function getRecommendations(answers, cards = staticCards) {
   const { creditScore, creditAge, goal, spending, annualFee, lifestyle } = answers
 
   // Hard filter: only show cards the user can realistically get
