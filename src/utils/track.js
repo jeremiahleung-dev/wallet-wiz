@@ -14,15 +14,16 @@ export function trackEvent(name, properties = {}) {
 
 // Named events — kept centralised so refactoring is trivial
 export const Events = {
-  SURVEY_STARTED:      'survey_started',
-  QUESTION_ANSWERED:   'question_answered',
-  RESULTS_VIEWED:      'results_viewed',
-  CARD_EXPANDED:       'card_expanded',
-  CARD_COLLAPSED:      'card_collapsed',
-  APPLY_CLICKED:       'apply_clicked',
-  SURVEY_RESTARTED:    'survey_restarted',
-  PRIVACY_VIEWED:      'privacy_viewed',
-  CARD_SAVED:          'card_saved',
-  CARD_UNSAVED:        'card_unsaved',
-  COMPARE_OPENED:      'compare_opened',
+  SURVEY_STARTED:          'survey_started',
+  WALLET_STEP_COMPLETED:   'wallet_step_completed',
+  QUESTION_ANSWERED:       'question_answered',
+  RESULTS_VIEWED:          'results_viewed',
+  CARD_EXPANDED:           'card_expanded',
+  CARD_COLLAPSED:          'card_collapsed',
+  APPLY_CLICKED:           'apply_clicked',
+  SURVEY_RESTARTED:        'survey_restarted',
+  PRIVACY_VIEWED:          'privacy_viewed',
+  CARD_SAVED:              'card_saved',
+  CARD_UNSAVED:            'card_unsaved',
+  COMPARE_OPENED:          'compare_opened',
 }

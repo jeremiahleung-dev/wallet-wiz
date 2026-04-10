@@ -1,11 +1,13 @@
 import { cards, SCORE_ORDER } from '../data/cards'
 
 export function getRecommendations(answers) {
-  const { creditScore, creditAge, goal, spending, annualFee, lifestyle } = answers
+  const { creditScore, creditAge, goal, spending, annualFee, lifestyle, ownedIds = [] } = answers
 
   // Hard filter: only show cards the user can realistically get
   const userScoreVal = SCORE_ORDER[creditScore] ?? 0
-  const eligible = cards.filter(card => SCORE_ORDER[card.minScore] <= userScoreVal)
+  const eligible = cards.filter(card =>
+    SCORE_ORDER[card.minScore] <= userScoreVal && !ownedIds.includes(card.id)
+  )
 
   // Hard filter: annual fee preference
   const feeEligible = eligible.filter(card => {

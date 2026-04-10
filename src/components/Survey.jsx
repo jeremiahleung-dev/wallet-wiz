@@ -1,12 +1,30 @@
 import { useState, useCallback } from 'react'
 import { questions } from '../data/questions'
 import QuestionCard from './QuestionCard'
+import WalletStep from './WalletStep'
 import { trackEvent, Events } from '../utils/track'
 
 export default function Survey({ onComplete }) {
+  const [walletDone, setWalletDone] = useState(false)
+  const [ownedIds, setOwnedIds] = useState([])
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState({})
   const [animState, setAnimState] = useState('idle')
+
+  // Wallet step = slot 0; questions = slots 1–6
+  const totalSteps = questions.length + 1
+  const currentStep = walletDone ? index + 1 : 0
+
+  const handleWalletComplete = (ids) => {
+    trackEvent(Events.WALLET_STEP_COMPLETED, { owned_count: ids.length })
+    setOwnedIds(ids)
+    setAnimState('out')
+    setTimeout(() => {
+      setWalletDone(true)
+      setAnimState('in')
+      setTimeout(() => setAnimState('idle'), 400)
+    }, 340)
+  }
 
   const handleAnswer = useCallback((optionId) => {
     const question = questions[index]
@@ -20,7 +38,7 @@ export default function Survey({ onComplete }) {
 
     if (index === questions.length - 1) {
       setAnimState('out')
-      setTimeout(() => onComplete(newAnswers), 340)
+      setTimeout(() => onComplete({ ...newAnswers, ownedIds }), 340)
       return
     }
 
@@ -31,10 +49,19 @@ export default function Survey({ onComplete }) {
       setAnimState('in')
       setTimeout(() => setAnimState('idle'), 400)
     }, 340)
-  }, [index, answers, onComplete])
+  }, [index, answers, ownedIds, onComplete])
 
   const handleBack = useCallback(() => {
-    if (index === 0) return
+    if (index === 0) {
+      // Back to wallet step
+      setAnimState('out-right')
+      setTimeout(() => {
+        setWalletDone(false)
+        setAnimState('in-left')
+        setTimeout(() => setAnimState('idle'), 400)
+      }, 340)
+      return
+    }
     setAnimState('out-right')
     setTimeout(() => {
       setIndex(i => i - 1)
@@ -60,23 +87,30 @@ export default function Survey({ onComplete }) {
         width: '100%',
         maxWidth: 400,
       }}>
-        {questions.map((_, i) => (
+        {Array.from({ length: totalSteps }).map((_, i) => (
           <div key={i} style={{
             height: 3,
             flex: 1,
             borderRadius: 2,
-            background: i <= index ? 'var(--progress-fill)' : 'var(--progress-track)',
+            background: i <= currentStep ? 'var(--progress-fill)' : 'var(--progress-track)',
             transition: 'background 0.35s ease',
           }} />
         ))}
       </div>
 
-      <QuestionCard
-        question={questions[index]}
-        animState={animState}
-        onAnswer={handleAnswer}
-        onBack={index > 0 ? handleBack : null}
-      />
+      {!walletDone ? (
+        <WalletStep
+          animState={animState}
+          onComplete={handleWalletComplete}
+        />
+      ) : (
+        <QuestionCard
+          question={questions[index]}
+          animState={animState}
+          onAnswer={handleAnswer}
+          onBack={handleBack}
+        />
+      )}
     </div>
   )
 }
