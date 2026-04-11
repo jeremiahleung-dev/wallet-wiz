@@ -72,9 +72,10 @@ export function getRecommendations(answers, cards = staticCards) {
     return { ...card, score }
   })
 
-  // Sort descending and return top 5
+  // Sort descending, strip any owned cards that slipped through, return top 5
   return scored
     .sort((a, b) => b.score - a.score)
+    .filter(card => !ownedIds.includes(card.id))
     .slice(0, 5)
 }
 

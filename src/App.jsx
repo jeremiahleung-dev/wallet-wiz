@@ -69,6 +69,7 @@ export default function App() {
     trackEvent(Events.RESULTS_VIEWED, {
       top_card: recs[0]?.id,
       result_count: recs.length,
+      owned_count: surveyAnswers.ownedIds?.length ?? 0,
     })
     setScreen('results')
   }
