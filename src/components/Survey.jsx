@@ -105,6 +105,7 @@ export default function Survey({ onComplete }) {
         />
       ) : (
         <QuestionCard
+          key={questions[index].id}
           question={questions[index]}
           animState={animState}
           onAnswer={handleAnswer}

@@ -29,6 +29,7 @@ export const questions = [
     id: 'goal',
     question: 'What is your primary goal with a new card?',
     subtitle: 'The right card depends heavily on what you want it to do for you.',
+    multiSelect: true,
     options: [
       { id: 'cash_back',        label: 'Cash Back',          description: 'Simple returns on everything you spend' },
       { id: 'travel',           label: 'Travel Rewards',     description: 'Points or miles for flights and hotels' },
@@ -42,6 +43,7 @@ export const questions = [
     id: 'spending',
     question: 'Where do you spend the most each month?',
     subtitle: 'Different cards reward different spending categories generously.',
+    multiSelect: true,
     options: [
       { id: 'dining',    label: 'Dining & Bars',       description: 'Restaurants, cafés, delivery apps' },
       { id: 'groceries', label: 'Groceries',           description: 'Supermarkets and grocery stores' },
@@ -68,6 +70,7 @@ export const questions = [
     id: 'lifestyle',
     question: 'How would you describe your lifestyle?',
     subtitle: 'Your habits shape which perks and features you\'ll actually use.',
+    multiSelect: true,
     options: [
       { id: 'simple',   label: 'Simple & Mindful',  description: 'I budget carefully, keep it lean' },
       { id: 'everyday', label: 'Everyday Modern',   description: 'Work, errands, the occasional dinner out' },
