@@ -44,6 +44,7 @@ function SectionLabel({ children }) {
       letterSpacing: '0.12em',
       color: 'var(--text-muted)',
       textTransform: 'uppercase',
+      textAlign: 'center',
       marginBottom: 12,
       marginTop: 32,
       paddingBottom: 8,
