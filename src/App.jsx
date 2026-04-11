@@ -4,7 +4,10 @@ import Welcome from './components/Welcome'
 import Survey from './components/Survey'
 import Results from './components/Results'
 import SavedCards from './components/SavedCards'
+import Catalogue from './components/Catalogue'
+import Footer from './components/Footer'
 import PrivacyModal from './components/PrivacyModal'
+import FeedbackModal from './components/FeedbackModal'
 import { getRecommendations } from './utils/recommend'
 import { getSavedIds, toggleSaved, clearSaved } from './utils/savedCards'
 import { trackEvent, Events } from './utils/track'
@@ -35,6 +38,7 @@ export default function App() {
     return []
   })
   const [showPrivacy, setShowPrivacy] = useState(false)
+  const [showFeedback, setShowFeedback] = useState(false)
   const [savedIds, setSavedIds] = useState(() => getSavedIds())
   const liveCardsRef = useRef(staticCards)
 
@@ -100,6 +104,10 @@ export default function App() {
     setScreen('my-cards')
   }
 
+  const handleOpenCatalogue = () => {
+    setScreen('catalogue')
+  }
+
   const handleRemoveFromCompare = (cardId) => {
     trackEvent(Events.CARD_REMOVED_FROM_COMPARE, { card_id: cardId })
     const updated = toggleSaved(cardId, savedIds)
@@ -124,6 +132,9 @@ export default function App() {
         onHome={handleRestart}
         savedCount={savedIds.length}
         onMyCards={handleOpenMyCards}
+        onCatalogue={handleOpenCatalogue}
+        onFeedback={() => setShowFeedback(true)}
+        activeScreen={screen}
       />
 
       {screen === 'welcome' && (
@@ -162,11 +173,21 @@ export default function App() {
           onBack={() => setScreen(recommendations.length > 0 ? 'results' : 'welcome')}
           title="My Cards"
           backLabel={recommendations.length > 0 ? '← Back to results' : '← Back to home'}
-          emptyMessage="Take the quiz and bookmark any cards you'd like to compare here."
+          emptyMessage="Browse the Catalogue and bookmark any cards you'd like to compare here."
+        />
+      )}
+      {screen === 'catalogue' && (
+        <Catalogue
+          savedIds={savedIds}
+          onToggleSave={handleToggleSave}
+          onViewMyCards={handleOpenMyCards}
         />
       )}
 
+      <Footer onPrivacy={handleOpenPrivacy} />
+
       {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
+      {showFeedback && <FeedbackModal onClose={() => setShowFeedback(false)} />}
     </>
   )
 }

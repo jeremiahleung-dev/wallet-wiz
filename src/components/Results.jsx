@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { getMatchReasons } from '../utils/recommend'
 import { trackEvent, Events } from '../utils/track'
 import CardVisual from './CardVisual'
-import Footer from './Footer'
 
 // ── Bookmark icon ──────────────────────────────────────────────────────────
 function BookmarkIcon({ filled }) {
@@ -130,8 +129,6 @@ export default function Results({ recommendations, answers, savedIds, onToggleSa
           </button>
         </div>
       </div>
-
-      <Footer onPrivacy={onPrivacy} />
 
       {/* Sticky compare bar */}
       {savedIds?.length > 0 && (

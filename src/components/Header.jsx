@@ -1,4 +1,4 @@
-export default function Header({ onHome, savedCount = 0, onMyCards }) {
+export default function Header({ onHome, savedCount = 0, onMyCards, onCatalogue, onFeedback, activeScreen }) {
   return (
     <header style={{
       display: 'flex',
@@ -29,49 +29,112 @@ export default function Header({ onHome, savedCount = 0, onMyCards }) {
         optimal
       </button>
 
+      {/* Nav tabs — right side */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        {/* Feedback button */}
+        <button
+          onClick={onFeedback}
+          style={{
+            fontFamily: 'var(--font)',
+            fontSize: '0.82rem',
+            fontWeight: 500,
+            color: 'var(--text-muted)',
+            background: 'none',
+            border: '1px solid var(--card-border)',
+            borderRadius: 8,
+            padding: '6px 14px',
+            cursor: 'pointer',
+            minHeight: 36,
+            transition: 'border-color 0.2s, color 0.2s',
+            flexShrink: 0,
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.borderColor = 'var(--text-muted)'
+            e.currentTarget.style.color = 'var(--text-secondary)'
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.borderColor = 'var(--card-border)'
+            e.currentTarget.style.color = 'var(--text-muted)'
+          }}
+        >
+          Feedback
+        </button>
+        {/* Catalogue tab */}
+        <button
+          onClick={onCatalogue}
+          style={{
+            fontFamily: 'var(--font)',
+            fontSize: '0.82rem',
+            fontWeight: 500,
+            color: activeScreen === 'catalogue' ? 'var(--accent)' : 'var(--text-muted)',
+            background: 'none',
+            border: `1px solid ${activeScreen === 'catalogue' ? 'var(--accent)' : 'var(--card-border)'}`,
+            borderRadius: 8,
+            padding: '6px 14px',
+            cursor: 'pointer',
+            minHeight: 36,
+            transition: 'border-color 0.2s, color 0.2s',
+            flexShrink: 0,
+          }}
+          onMouseEnter={e => {
+            if (activeScreen !== 'catalogue') {
+              e.currentTarget.style.borderColor = 'var(--text-muted)'
+              e.currentTarget.style.color = 'var(--text-secondary)'
+            }
+          }}
+          onMouseLeave={e => {
+            if (activeScreen !== 'catalogue') {
+              e.currentTarget.style.borderColor = 'var(--card-border)'
+              e.currentTarget.style.color = 'var(--text-muted)'
+            }
+          }}
+        >
+          Catalogue
+        </button>
 
-      {/* My Cards tab — far right */}
-      <button
-        onClick={onMyCards}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 6,
-          fontFamily: 'var(--font)',
-          fontSize: '0.82rem',
-          fontWeight: 500,
-          color: savedCount > 0 ? 'var(--text-primary)' : 'var(--text-muted)',
-          background: 'none',
-          border: '1px solid var(--card-border)',
-          borderRadius: 8,
-          padding: '6px 14px',
-          cursor: 'pointer',
-          minHeight: 36,
-          transition: 'border-color 0.2s, color 0.2s',
-          flexShrink: 0,
-        }}
-        onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--text-muted)'}
-        onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--card-border)'}
-      >
-        My Cards
-        {savedCount > 0 && (
-          <span style={{
-            background: 'var(--accent)',
-            color: '#fff',
-            borderRadius: '50%',
-            minWidth: 18,
-            height: 18,
-            fontSize: '0.68rem',
-            fontWeight: 700,
+        {/* My Cards tab */}
+        <button
+          onClick={onMyCards}
+          style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            padding: '0 4px',
-          }}>
-            {savedCount}
-          </span>
-        )}
-      </button>
+            gap: 6,
+            fontFamily: 'var(--font)',
+            fontSize: '0.82rem',
+            fontWeight: 500,
+            color: savedCount > 0 ? 'var(--text-primary)' : 'var(--text-muted)',
+            background: 'none',
+            border: '1px solid var(--card-border)',
+            borderRadius: 8,
+            padding: '6px 14px',
+            cursor: 'pointer',
+            minHeight: 36,
+            transition: 'border-color 0.2s, color 0.2s',
+            flexShrink: 0,
+          }}
+          onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--text-muted)'}
+          onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--card-border)'}
+        >
+          My Cards
+          {savedCount > 0 && (
+            <span style={{
+              background: 'var(--accent)',
+              color: '#fff',
+              borderRadius: '50%',
+              minWidth: 18,
+              height: 18,
+              fontSize: '0.68rem',
+              fontWeight: 700,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '0 4px',
+            }}>
+              {savedCount}
+            </span>
+          )}
+        </button>
+      </div>
     </header>
   )
 }

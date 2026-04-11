@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Footer from './Footer'
 
 const steps = [
   { n: '01', label: 'Answer six quick questions about your credit profile and goals' },
@@ -190,7 +189,6 @@ export default function Welcome({ onStart, onPrivacy, isLeaving }) {
         </p>
       </div>
 
-      <Footer onPrivacy={onPrivacy} />
     </div>
   )
 }
