@@ -57,10 +57,10 @@ function walletDisplayName(name, issuer) {
 
 const animClassMap = {
   idle: '',
-  out: 'anim-slide-out-left',
-  'out-right': 'anim-slide-out-right',
-  in: 'anim-slide-in-right',
-  'in-left': 'anim-slide-in-left',
+  out: 'anim-fade-out',
+  'out-right': 'anim-fade-out',
+  in: 'anim-fade-in',
+  'in-left': 'anim-fade-in',
 }
 
 // ── Custom checkbox row ──────────────────────────────────────────────────────

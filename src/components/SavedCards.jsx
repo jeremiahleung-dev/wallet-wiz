@@ -272,23 +272,25 @@ export default function SavedCards({ savedIds, scoreMap = {}, onRemove, onClearA
       }}>
         <button
           onClick={onBack}
+          aria-label={backLabel || 'Back'}
           style={{
             fontFamily: 'var(--font)',
-            fontSize: '0.88rem',
-            fontWeight: 500,
+            fontSize: '1.1rem',
             color: 'var(--text-muted)',
             background: 'none',
             border: '1px solid var(--card-border)',
             borderRadius: 8,
-            padding: '8px 14px',
+            padding: '0',
+            width: 44,
+            height: 44,
             cursor: 'pointer',
-            minHeight: 44,
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             flexShrink: 0,
           }}
         >
-          {backLabel || '← Back'}
+          ←
         </button>
         <h2 style={{
           position: 'absolute',
