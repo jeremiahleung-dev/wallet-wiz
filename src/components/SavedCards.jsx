@@ -255,7 +255,7 @@ export default function SavedCards({ savedIds, onRemove, onClearAll, onBack, tit
             flexShrink: 0,
           }}
         >
-          ← Back
+          {backLabel || '← Back'}
         </button>
         <h2 style={{
           position: 'absolute',

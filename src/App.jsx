@@ -149,6 +149,7 @@ export default function App() {
           onRemove={handleRemoveFromCompare}
           onClearAll={handleClearAll}
           onBack={() => setScreen('results')}
+          backLabel="← Back to results"
         />
       )}
       {screen === 'my-cards' && (
@@ -156,9 +157,9 @@ export default function App() {
           savedIds={savedIds}
           onRemove={handleRemoveFromCompare}
           onClearAll={handleClearAllMyCards}
-          onBack={() => setScreen('welcome')}
+          onBack={() => setScreen(recommendations.length > 0 ? 'results' : 'welcome')}
           title="My Cards"
-          backLabel="← Back to home"
+          backLabel={recommendations.length > 0 ? '← Back to results' : '← Back to home'}
           emptyMessage="Take the quiz and bookmark any cards you'd like to compare here."
         />
       )}
