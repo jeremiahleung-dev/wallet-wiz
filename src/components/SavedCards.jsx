@@ -2,6 +2,12 @@ import { useState } from 'react'
 import { cards as allCards } from '../data/cards'
 import { trackEvent, Events } from '../utils/track'
 
+function trimBenefit(text) {
+  const cleaned = text.replace(/—/g, '').replace(/\s+/g, ' ').trim()
+  const words = cleaned.split(' ')
+  return words.length <= 12 ? cleaned : words.slice(0, 12).join(' ')
+}
+
 // ── Mini star row ───────────────────────────────────────────────────────────
 function Stars({ rating }) {
   return (
@@ -130,7 +136,7 @@ function CardCellLabel({ name }) {
       fontFamily: 'var(--font)',
       fontSize: '0.72rem',
       fontWeight: 600,
-      color: 'var(--text-muted)',
+      color: 'rgba(255,255,255,0.55)',
       marginBottom: 6,
       whiteSpace: 'nowrap',
       overflow: 'hidden',
@@ -221,11 +227,11 @@ export default function SavedCards({ savedIds, onRemove, onClearAll, onBack, tit
 
       {/* Page header */}
       <div style={{
+        position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        gap: 12,
         marginBottom: 24,
-        flexWrap: 'wrap',
+        minHeight: 44,
       }}>
         <button
           onClick={onBack}
@@ -242,30 +248,25 @@ export default function SavedCards({ savedIds, onRemove, onClearAll, onBack, tit
             minHeight: 44,
             display: 'flex',
             alignItems: 'center',
+            flexShrink: 0,
           }}
         >
           ← Back
         </button>
-        <div style={{ flex: 1 }}>
-          <h2 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(1.4rem, 4vw, 2rem)',
-            fontWeight: 700,
-            color: 'var(--text-primary)',
-            letterSpacing: '-0.02em',
-          }}>
-            {title}
-            <span style={{
-              fontFamily: 'var(--font)',
-              fontSize: '0.85rem',
-              fontWeight: 500,
-              color: 'var(--text-muted)',
-              marginLeft: 10,
-            }}>
-              {savedCards.length} {savedCards.length === 1 ? 'card' : 'cards'}
-            </span>
-          </h2>
-        </div>
+        <h2 style={{
+          position: 'absolute',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(1.4rem, 4vw, 2rem)',
+          fontWeight: 700,
+          color: 'var(--text-primary)',
+          letterSpacing: '-0.02em',
+          whiteSpace: 'nowrap',
+          pointerEvents: 'none',
+        }}>
+          {title}
+        </h2>
         <button
           onClick={onClearAll}
           style={{
@@ -280,20 +281,21 @@ export default function SavedCards({ savedIds, onRemove, onClearAll, onBack, tit
             minHeight: 44,
             display: 'flex',
             alignItems: 'center',
+            marginLeft: 'auto',
+            flexShrink: 0,
           }}
         >
           Clear all
         </button>
       </div>
 
-      {/* Card chips — horizontal scroll */}
+      {/* Card chips — centered */}
       <div style={{
         display: 'flex',
         gap: 10,
-        overflowX: 'auto',
-        paddingBottom: 4,
+        flexWrap: 'wrap',
+        justifyContent: 'center',
         marginBottom: 4,
-        scrollbarWidth: 'none',
       }}>
         {savedCards.map(card => (
           <CardChip
@@ -382,8 +384,8 @@ export default function SavedCards({ savedIds, onRemove, onClearAll, onBack, tit
                   color: 'var(--text-primary)',
                   lineHeight: 1.5,
                 }}>
-                  <span style={{ color: 'var(--accent)', flexShrink: 0 }}>—</span>
-                  {b}
+                  <span style={{ color: 'var(--accent)', flexShrink: 0 }}>·</span>
+                  {trimBenefit(b)}
                 </li>
               ))}
             </ul>
