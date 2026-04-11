@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import { cards } from '../data/cards'
 
 // ── Filters ──────────────────────────────────────────────────────────────────
@@ -32,12 +32,24 @@ const ISSUER_ORDER = [
 
 export default function Catalogue({ savedIds, onToggleSave, onViewMyCards }) {
   const [activeFilters, setActiveFilters] = useState([])
+  const [filtersOpen, setFiltersOpen] = useState(false)
+  const filterRef = useRef(null)
 
   const toggleFilter = (id) => {
     setActiveFilters(prev =>
       prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id]
     )
   }
+
+  // Close filter panel on outside click
+  useEffect(() => {
+    if (!filtersOpen) return
+    const handler = (e) => {
+      if (filterRef.current && !filterRef.current.contains(e.target)) setFiltersOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [filtersOpen])
 
   const filteredCards = useMemo(() => {
     if (activeFilters.length === 0) return cards
@@ -70,21 +82,133 @@ export default function Catalogue({ savedIds, onToggleSave, onViewMyCards }) {
   return (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
 
-      {/* ── Page title ── */}
+      {/* ── Page title + filter trigger ── */}
       <div style={{ padding: '4px 28px 20px', maxWidth: 1120, margin: '0 auto', width: '100%' }}>
-        <h1 style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(1.6rem, 4vw, 2.4rem)',
-          fontWeight: 700,
-          color: 'var(--text-primary)',
-          letterSpacing: '-0.025em',
-          marginBottom: 6,
-        }}>
-          Card Catalogue
-        </h1>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, marginBottom: 6 }}>
+          <h1 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(1.6rem, 4vw, 2.4rem)',
+            fontWeight: 700,
+            color: 'var(--text-primary)',
+            letterSpacing: '-0.025em',
+          }}>
+            Card Catalogue
+          </h1>
+
+          {/* Filter button */}
+          <div ref={filterRef} style={{ position: 'relative', flexShrink: 0, marginTop: 6 }}>
+            <button
+              onClick={() => setFiltersOpen(o => !o)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 7,
+                fontFamily: 'var(--font)',
+                fontSize: '0.82rem',
+                fontWeight: 500,
+                color: filtersOpen || activeFilters.length > 0 ? 'var(--accent)' : 'var(--text-secondary)',
+                background: 'var(--card-bg)',
+                border: `1px solid ${filtersOpen || activeFilters.length > 0 ? 'var(--accent)' : 'var(--card-border)'}`,
+                borderRadius: 8,
+                padding: '7px 14px',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
+            >
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <line x1="2" y1="4" x2="14" y2="4"/>
+                <line x1="4" y1="8" x2="12" y2="8"/>
+                <line x1="6" y1="12" x2="10" y2="12"/>
+              </svg>
+              Filters
+              {activeFilters.length > 0 && (
+                <span style={{
+                  background: 'var(--accent)',
+                  color: '#fff',
+                  borderRadius: 10,
+                  fontSize: '0.65rem',
+                  fontWeight: 700,
+                  padding: '1px 6px',
+                  lineHeight: '16px',
+                }}>
+                  {activeFilters.length}
+                </span>
+              )}
+            </button>
+
+            {/* Filter dropdown panel */}
+            {filtersOpen && (
+              <div style={{
+                position: 'absolute',
+                top: 'calc(100% + 8px)',
+                right: 0,
+                background: 'var(--surface)',
+                border: '1px solid var(--card-border)',
+                borderRadius: 14,
+                padding: '16px 18px 14px',
+                minWidth: 320,
+                maxWidth: 'min(480px, calc(100vw - 48px))',
+                boxShadow: 'var(--shadow-card)',
+                zIndex: 30,
+                animation: 'fadeIn 0.15s ease',
+              }}>
+                {groups.map((group, i) => {
+                  const groupFilters = FILTERS.filter(f => f.group === group)
+                  return (
+                    <div key={group} style={{ marginBottom: i < groups.length - 1 ? 14 : 0 }}>
+                      <div style={{
+                        fontFamily: 'var(--font)',
+                        fontSize: '0.68rem',
+                        fontWeight: 600,
+                        color: 'var(--text-muted)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        marginBottom: 8,
+                      }}>
+                        {group}
+                      </div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                        {groupFilters.map(f => (
+                          <FilterPill
+                            key={f.id}
+                            label={f.label}
+                            active={activeFilters.includes(f.id)}
+                            onClick={() => toggleFilter(f.id)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })}
+                {activeFilters.length > 0 && (
+                  <button
+                    onClick={() => setActiveFilters([])}
+                    style={{
+                      marginTop: 14,
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontFamily: 'var(--font)',
+                      fontSize: '0.78rem',
+                      fontWeight: 500,
+                      color: 'var(--text-muted)',
+                      padding: 0,
+                      transition: 'color 0.2s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                  >
+                    Clear all ×
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
         <p style={{
           fontFamily: 'var(--font)',
-          fontSize: '0.95rem',
+          fontSize: '0.92rem',
           color: 'var(--text-secondary)',
           lineHeight: 1.5,
         }}>
@@ -101,7 +225,7 @@ export default function Catalogue({ savedIds, onToggleSave, onViewMyCards }) {
                   cursor: 'pointer',
                   color: 'var(--accent)',
                   fontFamily: 'var(--font)',
-                  fontSize: '0.95rem',
+                  fontSize: '0.92rem',
                   fontWeight: 500,
                   padding: 0,
                   textDecoration: 'underline',
@@ -113,74 +237,6 @@ export default function Catalogue({ savedIds, onToggleSave, onViewMyCards }) {
             </>
           )}
         </p>
-      </div>
-
-      {/* ── Filter bar ── */}
-      <div style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 20,
-        background: 'linear-gradient(180deg, var(--bg) 70%, transparent 100%)',
-        paddingBottom: 16,
-      }}>
-        <div style={{
-          maxWidth: 1120,
-          margin: '0 auto',
-          padding: '0 28px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 10,
-        }}>
-          {groups.map(group => {
-            const groupFilters = FILTERS.filter(f => f.group === group)
-            return (
-              <div key={group} style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                <span style={{
-                  fontFamily: 'var(--font)',
-                  fontSize: '0.7rem',
-                  fontWeight: 600,
-                  color: 'var(--text-muted)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  minWidth: 68,
-                  flexShrink: 0,
-                }}>
-                  {group}
-                </span>
-                {groupFilters.map(f => (
-                  <FilterPill
-                    key={f.id}
-                    label={f.label}
-                    active={activeFilters.includes(f.id)}
-                    onClick={() => toggleFilter(f.id)}
-                  />
-                ))}
-              </div>
-            )
-          })}
-          {activeFilters.length > 0 && (
-            <button
-              onClick={() => setActiveFilters([])}
-              style={{
-                alignSelf: 'flex-start',
-                marginLeft: 76,
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                fontFamily: 'var(--font)',
-                fontSize: '0.78rem',
-                fontWeight: 500,
-                color: 'var(--text-muted)',
-                padding: 0,
-                transition: 'color 0.2s',
-              }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
-              onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
-            >
-              Clear all filters ×
-            </button>
-          )}
-        </div>
       </div>
 
       {/* ── Issuer sections ── */}
@@ -290,8 +346,8 @@ function IssuerSection({ issuer, cards, savedIds, onToggleSave }) {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
-        gap: 14,
+        gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))',
+        gap: 10,
       }}>
         {cards.map(card => (
           <CardTile
@@ -332,7 +388,7 @@ function CardTile({ card, saved, onToggle }) {
       {/* Gradient card face */}
       <div style={{
         background: `linear-gradient(135deg, ${g0} 0%, ${g1} 100%)`,
-        padding: '14px 16px 18px',
+        padding: '8px 10px 10px',
         position: 'relative',
         aspectRatio: '1.7 / 1',
         display: 'flex',
@@ -345,11 +401,11 @@ function CardTile({ card, saved, onToggle }) {
             background: 'rgba(0,0,0,0.35)',
             backdropFilter: 'blur(6px)',
             color: 'rgba(255,255,255,0.9)',
-            fontSize: '0.6rem',
+            fontSize: '0.48rem',
             fontWeight: 600,
-            letterSpacing: '0.05em',
-            borderRadius: 6,
-            padding: '3px 8px',
+            letterSpacing: '0.04em',
+            borderRadius: 4,
+            padding: '2px 5px',
           }}>
             {card.annualFee === 0 ? 'NO FEE' : `$${card.annualFee}/YR`}
           </span>
@@ -357,9 +413,9 @@ function CardTile({ card, saved, onToggle }) {
           {/* Network badge */}
           <span style={{
             fontFamily: 'var(--font)',
-            fontSize: '0.58rem',
+            fontSize: '0.44rem',
             fontWeight: 700,
-            color: 'rgba(255,255,255,0.5)',
+            color: 'rgba(255,255,255,0.45)',
             letterSpacing: '0.04em',
             textTransform: 'uppercase',
           }}>
@@ -371,11 +427,11 @@ function CardTile({ card, saved, onToggle }) {
         <div>
           <div style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '0.8rem',
+            fontSize: '0.58rem',
             fontWeight: 700,
             color: 'rgba(255,255,255,0.95)',
             lineHeight: 1.3,
-            textShadow: '0 1px 4px rgba(0,0,0,0.4)',
+            textShadow: '0 1px 3px rgba(0,0,0,0.4)',
           }}>
             {card.name}
           </div>
@@ -384,16 +440,16 @@ function CardTile({ card, saved, onToggle }) {
 
       {/* Bottom info strip */}
       <div style={{
-        padding: '10px 14px 12px',
+        padding: '6px 10px 8px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: 8,
+        gap: 6,
       }}>
         {card.tag ? (
           <span style={{
             fontFamily: 'var(--font)',
-            fontSize: '0.68rem',
+            fontSize: '0.58rem',
             fontWeight: 500,
             color: 'var(--text-muted)',
             lineHeight: 1.3,
@@ -412,15 +468,15 @@ function CardTile({ card, saved, onToggle }) {
           style={{
             background: saved ? 'var(--accent-dim)' : 'transparent',
             border: `1px solid ${saved ? 'var(--accent)' : 'var(--card-border)'}`,
-            borderRadius: 8,
-            width: 30,
-            height: 30,
+            borderRadius: 6,
+            width: 22,
+            height: 22,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
             color: saved ? 'var(--accent)' : 'var(--text-muted)',
-            fontSize: '0.85rem',
+            fontSize: '0.68rem',
             transition: 'all 0.15s ease',
             flexShrink: 0,
           }}
