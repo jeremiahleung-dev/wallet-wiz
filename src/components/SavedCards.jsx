@@ -393,19 +393,23 @@ export default function SavedCards({ savedIds, scoreMap = {}, onRemove, onClearA
       {/* ── Rewards ── */}
       <SectionLabel>Rewards</SectionLabel>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {savedCards.map(card => (
-          <CardCell key={card.id}>
-            <CardCellLabel name={card.name} />
-            <p style={{
-              fontFamily: 'var(--font)',
-              fontSize: '0.88rem',
-              color: 'var(--text-primary)',
-              lineHeight: 1.6,
-            }}>
-              {card.rewards}
-            </p>
-          </CardCell>
-        ))}
+        {savedCards.map(card => {
+          const isWinner = card.id === winnerCardId
+          return (
+            <CardCell key={card.id} style={isWinner ? { border: '1.5px solid var(--accent)', boxShadow: '0 0 0 3px var(--accent-dim)' } : undefined}>
+              {isWinner && <BestPill />}
+              <CardCellLabel name={card.name} />
+              <p style={{
+                fontFamily: 'var(--font)',
+                fontSize: '0.88rem',
+                color: 'var(--text-primary)',
+                lineHeight: 1.6,
+              }}>
+                {card.rewards}
+              </p>
+            </CardCell>
+          )
+        })}
       </div>
 
       {/* ── Sign-up Bonus ── */}
@@ -413,23 +417,27 @@ export default function SavedCards({ savedIds, scoreMap = {}, onRemove, onClearA
         <>
           <SectionLabel>Welcome Offer</SectionLabel>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {savedCards.map(card => (
-              <CardCell key={card.id}>
-                <CardCellLabel name={card.name} />
-                <p style={{
-                  fontFamily: 'var(--font)',
-                  fontSize: '0.88rem',
-                  color: card.signupBonus && card.signupBonus !== 'None'
-                    ? 'var(--text-primary)'
-                    : 'var(--text-muted)',
-                  lineHeight: 1.6,
-                }}>
-                  {card.signupBonus && card.signupBonus !== 'None'
-                    ? card.signupBonus
-                    : 'No welcome offer'}
-                </p>
-              </CardCell>
-            ))}
+            {savedCards.map(card => {
+              const isWinner = card.id === winnerCardId
+              return (
+                <CardCell key={card.id} style={isWinner ? { border: '1.5px solid var(--accent)', boxShadow: '0 0 0 3px var(--accent-dim)' } : undefined}>
+                  {isWinner && <BestPill />}
+                  <CardCellLabel name={card.name} />
+                  <p style={{
+                    fontFamily: 'var(--font)',
+                    fontSize: '0.88rem',
+                    color: card.signupBonus && card.signupBonus !== 'None'
+                      ? 'var(--text-primary)'
+                      : 'var(--text-muted)',
+                    lineHeight: 1.6,
+                  }}>
+                    {card.signupBonus && card.signupBonus !== 'None'
+                      ? card.signupBonus
+                      : 'No welcome offer'}
+                  </p>
+                </CardCell>
+              )
+            })}
           </div>
         </>
       )}
@@ -513,7 +521,7 @@ export default function SavedCards({ savedIds, scoreMap = {}, onRemove, onClearA
           <SectionLabel>Apply</SectionLabel>
           <div style={cardGrid}>
             {savedCards.map(card => (
-              <div key={card.id} style={card.id === winnerCardId ? winnerCellStyle : cellStyle}>
+              <div key={card.id} style={cellStyle}>
                 {card.applyUrl ? (
                   <a
                     href={card.applyUrl}
