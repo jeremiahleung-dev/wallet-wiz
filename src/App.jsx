@@ -10,14 +10,37 @@ import { getSavedIds, toggleSaved, clearSaved } from './utils/savedCards'
 import { trackEvent, Events } from './utils/track'
 import { cards as staticCards } from './data/cards'
 
+const SESSION_KEY = 'optimal_session'
+
+function loadSession() {
+  try {
+    const raw = sessionStorage.getItem(SESSION_KEY)
+    return raw ? JSON.parse(raw) : null
+  } catch { return null }
+}
+
+function saveSession(screen, answers) {
+  try { sessionStorage.setItem(SESSION_KEY, JSON.stringify({ screen, answers })) } catch {}
+}
+
 export default function App() {
-  const [screen, setScreen] = useState('welcome')
+  const session = loadSession()
+  const [screen, setScreen] = useState(session?.screen || 'welcome')
   const [leaving, setLeaving] = useState(false)
-  const [recommendations, setRecommendations] = useState([])
-  const [answers, setAnswers] = useState({})
+  const [answers, setAnswers] = useState(session?.answers || {})
+  const [recommendations, setRecommendations] = useState(() => {
+    if (session?.answers && (session?.screen === 'results' || session?.screen === 'compare')) {
+      return getRecommendations(session.answers, staticCards)
+    }
+    return []
+  })
   const [showPrivacy, setShowPrivacy] = useState(false)
   const [savedIds, setSavedIds] = useState(() => getSavedIds())
   const liveCardsRef = useRef(staticCards)
+
+  useEffect(() => {
+    saveSession(screen, answers)
+  }, [screen, answers])
 
   useEffect(() => {
     fetch('/api/cards')
@@ -48,6 +71,7 @@ export default function App() {
 
   const handleRestart = () => {
     trackEvent(Events.SURVEY_RESTARTED)
+    sessionStorage.removeItem(SESSION_KEY)
     setScreen('welcome')
     setRecommendations([])
     setAnswers({})
